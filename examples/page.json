@@ -1,31 +1,31 @@
 {
-    "id": "pub_t2",
+    "id": "my_page_932849fdhg",
     "entityType": "pub",
     "version": "1.0",
     "title": "Title",
     "description": "long text",
     "card": {
         "title": "Title",
-        "description": "long text",
+        "description": "very short description",
         "imageAbsolutePath": "/thumb_image.png"
     },
     "editorIndexAbsolutePath": "/admin/admin-index.hbs",
     "demoIndexAbsolutePath": "/preview/preview-index.hbs",
     "developer": {
-        "smedianId": "5927167c5fbc457423b17612",
-        "name": "Lincoln W Daniel",
-        "url": "http://lincolnwdaniel.com"
+        "smedianId": "you can find this by visiting http://smedian.com/me",
+        "name": "my name",
+        "url": "my_personal_website_url.com"
     },
     "keywords": [
-        "writer"
+        "some", "relevant", "keywords"
     ],
     "customizableUnits": [
-        "Color"
+        "Colors", "Borders", "Logo", "etc."
     ],
-    "customizationDifficulty": "Easy",
+    "customizationDifficulty": "Moderate",
     "language": {
         "id": "angular",
-        "version": ""
+        "version": "2.x.x"
     },
     "hooks": {
         "beforeSaveScript": "/path/to/script.js",

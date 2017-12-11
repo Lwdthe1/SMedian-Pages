@@ -28,8 +28,36 @@
         "version": ""
     },
     "hooks": {
-        "beforeSaveScript": "/",
-        "serverSideRenderScript": "/"
-    }
+        "beforeSaveScript": "/path/to/script.js",
+        "serverSideRenderScript": "/path/to/script.js"
+    },
+    "tests": [
+        {
+            "key": "beforeSave",
+            "cases": [
+                {
+                    "script": "/path/to/script1.js",
+                    "data": "/path/to/data1.json"
+                },
+                {
+                    "script": "/path/to/script2.js",
+                    "data": "/path/to/data2.json"
+                }
+            ]
+        },
+        {
+            "key": "serverSideRender",
+            "cases": [
+                {
+                    "script": "/path/to/script1.js",
+                    "data": "/path/to/data1.json"
+                },
+                {
+                    "script": "/path/to/script2.js",
+                    "data": "/path/to/data2.json"
+                }
+            ]
+        }
+    ]
 }
   
