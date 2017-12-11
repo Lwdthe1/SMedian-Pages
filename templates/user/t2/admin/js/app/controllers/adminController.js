@@ -14,16 +14,11 @@ angularApp
 
         $scope.saved = false
 
-        $scope.smedianPageComponent_photoGallery = new SmedianPages.component.PhotoGallery({
-            runUiUpdate: (updateCallback) => {
-                $timeout(() => {
-                    updateCallback()
-                })
-            },
+        $scope.photoGallery = new SmedianPages.component.PhotoGallery({
             images: $scope.page.scTypedArrayOfImage.values,
             onSelectImage: (image) => {
                 $scope.onPhotoGallerySelectedImage(image)
-            },
+            }
         })
 
         $scope.$on('socket:user_send_access_token', () => {
@@ -123,7 +118,7 @@ angularApp
         }
 
         $scope.openImageGallery = function(type, opt_object) {
-            $scope.smedianPageComponent_photoGallery.toggleShow(true)
+            $scope.photoGallery.toggleShow(true)
             $scope.onPhotoGallerySelectedImage = (image) => {
                 $timeout(() => {
                     switch(type) {

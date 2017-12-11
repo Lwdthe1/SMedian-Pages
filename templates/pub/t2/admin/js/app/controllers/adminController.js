@@ -12,12 +12,7 @@ angularApp
         $scope.draftData = $scope.page.draftData
         $scope.saved = false
 
-        $scope.smedianPageComponent_photoGallery = new SmedianPages.component.PhotoGallery({
-            runUiUpdate: (updateCallback) => {
-                $timeout(() => {
-                    updateCallback()
-                })
-            },
+        $scope.photoGallery = new SmedianPages.component.PhotoGallery({
             images: $scope.page.scTypedArrayOfImage.values,
             onSelectImage: (image) => {
                 $scope.onPhotoGallerySelectedImage(image)

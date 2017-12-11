@@ -226,4 +226,8 @@ SmedianPages.component.PhotoGallery = function(config) {
         if (!base64Url) return
         return 2*Math.ceil(base64Url.length/3) /1000
     }
+
+    if (!config.awaitAttachActionsMesage) {
+        _attachActions()
+    }
 }
