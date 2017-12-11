@@ -1,0 +1,19 @@
+{
+    "id": "my_page_932849fdhg",
+    "entityType": "pub",
+    "developer": {
+        "name": "My Name",
+        "smedianId": "find this at https://www.smedian.com/me",
+        "githubUrl": "https://github.com/myUsername",
+        "url": "http://my-personal-site.com"
+    },
+    "versions": [
+        {
+            "1.0": {
+                "released": true,
+                "versionAbsolutePath": "/path/to/version.json"
+            }
+        }
+    ]
+}
+  

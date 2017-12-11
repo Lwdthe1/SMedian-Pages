@@ -1,31 +1,23 @@
 {
-    "id": "my_page_932849fdhg",
-    "entityType": "pub",
-    "version": "1.0",
     "title": "Title",
     "description": "long text",
     "card": {
         "title": "Title",
-        "description": "very short description",
+        "description": "long text",
         "imageAbsolutePath": "/thumb_image.png"
     },
     "editorIndexAbsolutePath": "/admin/admin-index.hbs",
     "demoIndexAbsolutePath": "/preview/preview-index.hbs",
-    "developer": {
-        "smedianId": "you can find this by visiting http://smedian.com/me",
-        "name": "my name",
-        "url": "my_personal_website_url.com"
-    },
     "keywords": [
-        "some", "relevant", "keywords"
+        "writer"
     ],
     "customizableUnits": [
-        "Colors", "Borders", "Logo", "etc."
+        "Color"
     ],
-    "customizationDifficulty": "Moderate",
+    "customizationDifficulty": "Easy",
     "language": {
         "id": "angular",
-        "version": "2.x.x"
+        "version": ""
     },
     "hooks": {
         "beforeSaveScript": "/path/to/script.js",

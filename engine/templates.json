@@ -1,0 +1,17 @@
+{
+    "version": "0.0.1",
+    "templates": {
+        "user": [
+            {
+                "id": "uniqueTemplateId",
+                "templateAbsolutePath": "/path/to/user/template.json"
+            }
+        ],
+        "pub": [
+            {
+                "id": "uniqueTemplateId",
+                "templateAbsolutePath": "/path/to/pub/template.json"
+            }
+        ]
+    }
+}

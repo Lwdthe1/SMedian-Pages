@@ -1,0 +1,18 @@
+{
+    "id": "user_t2",
+    "entityType": "user",
+    "developer": {
+        "smedianId": "5927167c5fbc457423b17612",
+        "name": "Lincoln W Daniel",
+        "url": "http://lincolnwdaniel.com"
+    },
+    "versions": [
+        {
+            "1.0": {
+                "released": true,
+                "versionAbsolutePath": "/path/to/version.json"
+            }
+        }
+    ]
+}
+  
