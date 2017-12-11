@@ -1,0 +1,3 @@
+const SmedianPagesUtilManager = function() {
+
+}

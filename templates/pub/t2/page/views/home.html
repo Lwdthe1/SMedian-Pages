@@ -1,0 +1,305 @@
+<home>
+  <!-- Header -->
+  <header id="header" style="background-color: #{{templateData.heroSection.backgroundColor.replace('#','')}}; background-image: url('{{templateData.heroSection.backgroundImageUrl}}'); background-size: cover; background-position: 50% 50%;">
+    <div class="inner">
+      <a class="image avatar">
+        <img ng-src="{{templateData.about.logoUrl}}" alt="" />
+      </a>
+      <h1 ng-bind="templateData.heroSection.title" style="color: #{{templateData.heroSection.textColor.replace('#','')}};"></h1>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <div id="main">
+    <!-- One -->
+    <section id="one">
+      <header class="major">
+        <h2>{{templateData.aboutSection.title || 'About Us'}}</h2>
+      </header>
+      <p ng-bind="templateData.aboutSection.description"></p>
+      <p style="font-size:10px">
+        {{(page.pub.tags[0] && page.pub.tags[0].substring(0,1).toUpperCase() + page.pub.tags[0].substring(1).toLowerCase()) || ''}} 
+        <span ng-if="page.pub.counts.cacheNumContributeRequests">
+          <span class="middot">·</span> 
+          {{page.pub.counts.cacheNumContributeRequests}} Requests to Contribute
+        </span>
+        <span ng-if="page.pub.counts.cacheNumMediumFollowers">
+          <span class="middot">·</span> 
+          {{page.pub.counts.cacheNumMediumFollowers | number:0}} Followers
+        </span>
+        <span ng-if="page.pub.followersData.growthCountAvgRounded">
+          <span class="middot">·</span>
+          Growing by {{page.pub.followersData.growthCountAvgRounded}} Followers Per Day
+        </span>
+      </p>
+      <ul class="actions">
+        <li>
+          <a class="button" 
+            ng-show="templateData.heroSection.showRequestToConributeButton"
+            ng-click="scrollToRequestToContribute()">
+            Request to Contribute
+          </a>
+        </li>
+        <li>
+          <a class="button" 
+            ng-bind="templateData.heroSection.newsletterButton.text" 
+            ng-show="templateData.heroSection.showNewsletterButton" 
+            ng-click="scrollToNewsletterForm()"></a>
+        </li>
+        <li>
+          <a class="button" 
+            ng-bind="templateData.heroSection.contactButton.text" 
+            ng-show="templateData.heroSection.showContactButton" 
+            ng-click="scrollToContactForm()"></a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Two -->
+    <section id="two" ng-if="templateData.featuredStoriesSection.show && templateData.featuredStoriesSection.stories.length">
+      <h2>{{templateData.featuredStoriesSection.title || 'Featured Stories'}}</h2>
+      <div class="row masonry-grid--featured-stories">
+        <article class="6u 12u$(xsmall) work-item masonry-grid-item--featured-story" ng-repeat="featuredStory in templateData.featuredStoriesSection.stories">
+          <a class="image fit thumb" ng-href="//{{featuredStory.url.replace('https://', '').replace('http://', '')}}" target="_blank">
+            <img ng-src="//{{featuredStory.imageUrl.replace('https://', '').replace('http://', '')}}" alt="" />
+          </a>
+          <h3 ng-bind="featuredStory.title"></h3>
+          <p ng-bind="featuredStory.description"></p>
+        </article>
+      </div>
+      <ul class="actions">
+        <li ng-show="templateData.featuredStoriesSection.moreStoriesButton.url.length">
+          <a ng-href="//{{templateData.featuredStoriesSection.moreStoriesButton.url.replace('https://', '').replace('http://', '')}}" target="_blank" class="button" ng-bind="templateData.featuredStoriesSection.moreStoriesButton.text"></a>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="form-container w-container" id="rtc-form-section">
+        <h2 class="form-heading">
+          <span ng-show="pub.sentRequestToContribute">Sent Your </span>Request to Contribute
+        </h2>
+        <div class="form-wrapper w-form">
+          <div class="form" >
+            <div ng-show="!pub.currentUserContributeRequest">
+              <label class="field-label-3" for="email">Reference Article Links <span class="form-label-optional">(optional)</span></label>
+              <div class="form-rtc-links w-row">
+                <div style="margin-bottom:10px" ng-repeat="supportingLink in ij.newRequestToContributeData.supportingLinks">
+                  <input ng-model="supportingLink.url" class="form-field w-input" placeholder="Reference url ..." type="text">
+                </div>
+                <button class="clean-button clean-button--small" style="margin-top:10px margin-bottom:10px" 
+                  ng-show="ij.newRequestToContributeData.supportingLinks.length < 3"
+                  ng-click="addNewRequestToContributeSupportingLink()">
+                  Add Another Reference Link
+                </button>
+              </div>
+              <div ng-show="templateData.requestToContributeForm.includeNameField || templateData.requestToContributeForm.includeEmailField || templateData.requestToContributeForm.includeMessageField">
+                <label class="field-label-3">Your Info<span class="form-label-optional">(optional)</span></label>
+                <input ng-model="ij.newRequestToContributeData.email" ng-show="templateData.requestToContributeForm.includeEmailField" class="form-field w-input" id="email" maxlength="256" name="email" placeholder="Email Address" required="required" type="email">
+                <textarea ng-model="ij.newRequestToContributeData.message" ng-show="templateData.requestToContributeForm.includeMessageField" class="form-field w-input" id="field" maxlength="1000" name="field" placeholder="Optional Message"></textarea>
+              </div>
+              <input class="button form-button w-button" style="margin-top:30px" data-wait="Please wait..." type="submit" 
+                value="Submit Request to Contribute"
+                ng-show="!pub.sendingRequestToContribute && !pub.currentUserContributeRequest"
+                ng-click="sendPubContributeRequest()">
+            </div>
+            <div class="clean-text text-s" ng-show="pub.sendingRequestToContribute">Sending your request to contribute ...</div>
+            <div class="clean-text form-submit-indicator--fail" ng-show="pub.failedToSendRequestToContribute">Failed to Send Your Request to Contribute ...</div>
+          </div>
+          <div ng-show="pub.currentUserRequestedToContribute && !pub.sendingRetractRequestToContribute" class="pubMetaInline">
+            <div style="text-align:left; margin-bottom:20px" ng-show="templateData.requestToContributeForm.includeExternalForm">
+              <label class="field-label-3">Please Fill Out This Form to Complete Your Request</label>
+              <a class="clean-button clean-button--green clean-button--small" ng-href="{{templateData.requestToContributeForm.externalFormUrl}}" target="_blank">
+                Go to Form
+              </a>
+            </div>
+            <ul ng-show="!pub.currentUserContributeRequest.systemDisabled" style="list-style: none; padding-left:0px">
+              <li style="margin-bottom:5px; text-align:left" ng-show="pub.currentUserContributeRequest.supportingLinks.length">
+                <b>
+                  Reference Article Links
+                </b>
+              </li>
+              <li style="width:100%; text-align:left" 
+                ng-repeat="supportingLink in pub.currentUserContributeRequest.supportingLinks | orderBy:'createdAt'">
+                <table class="">
+                  <tr>
+                    <td style="padding:10px">
+                      <img style="width:10px; height:10px; cursor: pointer" src="/img/close-x.svg" 
+                      ng-click="retractPubContributeRequestSupportingLink(supportingLink.id)"/>
+                    </td>
+                    <td>
+                      <a target="_blank" class="clean-button--plain" title="Visit Reference Link" href="{{supportingLink.url}}">
+                        {{supportingLink.url}}
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </li>
+              <li>
+              <div ng-show="(!pub.currentUserContributeRequest.supportingLinks || pub.currentUserContributeRequest.supportingLinks.length < 3)" style="margin-top:10px;text-align:left">
+                  <a ng-show="!showAddRequestSupportingLinkInput" class="clean-button clean-button--small clean-button--green" style="margin-top:10px;" ng-show="!showAddRequestSupportingLinkInput" 
+                  ng-click="showAddRequestSupportingLinkInput = !showAddRequestSupportingLinkInput">Add Reference Link</a>
+
+                  <div ng-show="showAddRequestSupportingLinkInput">
+                  <input autocomplete="on" class="form-field w-input" ng-model="newSupportingUrl" placeholder="Enter article url ...">
+                  
+                  <input class="form-field w-input" type="url" ng-model="newSupportingUrlHidden" style="display:none">
+                  <button class="clean-button" ng-show="isUrlValid(newSupportingUrl)"
+                      ng-click="newSupportingUrlHidden = newSupportingUrl; newSupportingUrl = '';
+                      sendPubContributeRequestSupportingLink(pub, newSupportingUrlHidden);">
+                      Add
+                  </button>
+                  <button class="clean-button ct-warning cbrc-l-red" 
+                      ng-show="!isUrlValid(newSupportingUrl)">
+                      Add
+                  </button>
+                  </div>
+              </div>
+              </li>
+            </ul>
+              
+            <h6 ng-attr-id="{{ 'pub-me-' + pub.id }}" ng-show="pub.currentUserContributeRequest.sentTimes
+            && !pub.currentUserIsContributor" 
+            class="clean-text text-s">
+                Request already sent 
+                <span ng-show="pub.currentUserContributeRequest.sentTimes == 1">once.</span>
+                <span ng-show="pub.currentUserContributeRequest.sentTimes > 1">
+                {{pub.currentUserContributeRequest.sentTimes}} times.
+                </span>
+                <br>
+            </h6>
+            <b ng-attr-id="{{ 'pub-me-' + pub.id }}" ng-show="pub.currentUserContributeRequest.systemDisabled 
+            && !pub.currentUserIsContributor" 
+            class="clean-text text-t ct-warning">This request will not be sent again.</b>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Form -->
+    <section id="newsletter-form-section" ng-show="templateData.showNewsletterForm">
+      <h2>{{templateData.newsletterForm.title || 'Join Our Newsletter'}}</h2>
+      <p ng-bind="templateData.newsletterForm.description"></p>
+      <div class="row">
+        <div class="8u 12u$(small)">
+          <div ng-show="!newNewsletterSignup.lastSentEmail || newNewsletterSignup.lastSentEmail != newNewsletterSignup.email">
+            <div class="row uniform 50%">
+              <div class="6u$ 12u$(xsmall)">
+                <input ng-model="newNewsletterSignup.email" type="email" name="email" id="email" placeholder="Email" />
+              </div>
+              <div class="6u 12u$(xsmall)">
+                <input ng-model="newNewsletterSignup.name" type="text" placeholder="Your name"/>
+              </div>
+            </div>
+          </div>
+          <ul class="actions" style="margin-top:10px">
+            <li ng-show="!newNewsletterSignup.lastSentEmail || newNewsletterSignup.lastSentEmail != newNewsletterSignup.email">
+              <input type="submit" value="{{templateData.newsletterForm.submitButton.text}}" ng-show="!newNewsletterSignup.sendingSubmission" ng-click="submitNewsletterSignup()"/>
+            </li>
+            <li>
+              <p class="clean-text text-s" ng-show="newNewsletterSignup.sendingSubmission">Sending ...</p>
+              <div ng-show="newNewsletterSignup.lastSentEmail == newNewsletterSignup.email" class="form-success-message" style="tetx-align: center">
+                <h3 class="heading" style="text-align: center;">
+                  {{templateData.newsletterForm.successTitle || 'Thanks for Signing Up!'}}
+                </h3>
+                <p class="clean-text js-clampable js-ellipsis" style="max-height:50px; width: 100%; margin-bottom:10px; line-height: 1.2em;">
+                  {{templateData.newsletterForm.successText || 'We received your submission.'}}
+                </p>
+                <a class="clean-button clean-button--small clean-button--green u-marginLeft0"
+                  ng-show="templateData.newsletterForm.successCTAUrl.length && templateData.newsletterForm.successCTAText.length"
+                    ng-href="//{{templateData.newsletterForm.successCTAUrl.replace('https://', '').replace('http://', '')}}" target="_blank">
+                    <span ng-bind="templateData.newsletterForm.successCTAText" class="button-label  button-defaultState js-buttonLabel">
+                    </span>
+                </a>
+                <img ng-show="templateData.newsletterForm.successImageUrl.length" ng-src="{{templateData.newsletterForm.successImageUrl}}" style="width:100%; max-height:700px; margin-top:10px">
+              </div>
+              <div ng-show="newNewsletterSignup.errorMessage" class="error-message w-form-fail">
+                <div>{{newNewsletterSignup.errorMessage}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact-form-section" ng-show="templateData.showContactForm && templateData.contactForm.recipientEmail.length > 4">
+        <h2>{{templateData.contactForm.title || 'Contact Us'}}</h2>
+        <p ng-bind="templateData.contactForm.description"></p>
+        <div class="row">
+          <div class="8u 12u$(small)">
+            <div ng-show="!newContactFormSubmission.sentEmail">
+              <div class="row uniform 50%">
+                <div class="6u$ 12u$(xsmall)">
+                  <input ng-model="newContactFormSubmission.from" type="email" name="email" id="email" placeholder="Email" />
+                </div>
+                <div class="6u 12u$(xsmall)">
+                  <input type="text" ng-model="newContactFormSubmission.subject" ng-show="templateData.contactForm.includeSubjectField" placeholder="Subject"/>
+                </div>
+                <div class="12u$">
+                  <textarea ng-model="newContactFormSubmission.message" maxlength="5000" rows="4"></textarea>
+                </div>
+              </div>
+            </div>
+            <ul class="actions" style="margin-top:10px">
+              <li ng-show="!newContactFormSubmission.sentEmail">
+                <input type="submit" value="{{templateData.contactForm.submitButton.text || 'Send Message'}}" 
+                  ng-show="!newContactFormSubmission.sendingSubmission"
+                  ng-click="sendContactFormSubmission()"/>
+              </li>
+              <li>
+                <p ng-show="newContactFormSubmission.sendingSubmission">Sending ...</p>
+                <div ng-show="newContactFormSubmission.sentEmail" class="form-success-message" style="tetx-align: center">
+                  <h3 class="heading" style="text-align: center;">
+                    {{templateData.contactForm.successTitle || 'Thanks for Contacting Us!'}}
+                  </h3>
+                  <p class="clean-text js-clampable js-ellipsis" style="max-height:50px; width: 100%; margin-bottom:10px; line-height: 1.2em;">
+                    {{templateData.contactForm.successText || 'We will respond as soon as possible.'}}
+                  </p>
+                  <a class="clean-button clean-button--small clean-button--green u-marginLeft0"
+                    ng-show="templateData.contactForm.successCTAUrl.length && templateData.contactForm.successCTAText.length"
+                      ng-href="//{{templateData.contactForm.successCTAUrl.replace('https://', '').replace('http://', '')}}" target="_blank">
+                      <span ng-bind="templateData.contactForm.successCTAText" class="button-label  button-defaultState js-buttonLabel">
+                      </span>
+                  </a>
+                  <img ng-show="templateData.contactForm.successImageUrl.length" ng-src="{{templateData.contactForm.successImageUrl}}" style="width:100%; max-height:700px; margin-top:10px">
+                </div>
+                <div ng-show="newContactFormSubmission.errorMessage" class="error-message w-form-fail">
+                  <div>{{newContactFormSubmission.errorMessage}}</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <section id="footer">
+        <div class="inner" style="padding-left:10px">
+          <ul class="icons">
+            <li>
+                <a style="" ng-repeat="socialLink in templateData.socialLinks" 
+                  ng-show="socialLink.url.trim().length"
+                  ng-href="//{{socialLink.url.replace('https://', '').replace('http://', '')}}" target="_blank">
+                  <img ng-if="socialLink.type == 'medium'" class="icon" src="images/medium.png" width="39">
+                  <img ng-if="socialLink.type == 'twitter'" class="icon" src="images/twitter.svg" width="39">
+                  <img ng-if="socialLink.type == 'linkedin'" class="icon" src="images/linkedin.svg" width="39">
+                  <img ng-if="socialLink.type == 'facebook'" class="icon" src="images/facebook.svg" width="39">
+                  <img ng-if="socialLink.type == 'github'" class="icon" src="images/github.svg" width="39">
+                </a>
+            </li>
+            <br>
+            <li>&copy; Made With <a href="//smedian.com/pages" target="_blank" style="color: #a2a2a2">Smedian Pages</a></li>
+          </ul>
+          <ul style="list-style: none; padding-left: 0 !important;">
+              <li class="js-footerLinksContainer" style="padding-left:0" ng-repeat="footerLink in templateData.footerSection.links">
+                <a class="link-block w-inline-block" style="margin-top:5px"  
+                  ng-href="//{{footerLink.url.replace('https://', '').replace('http://', '')}}">
+                  <span class="text-block">{{footerLink.text}}</span>
+                </a>
+              </li>
+          </ul>
+        </div>
+      </section>
+  </div>
+</home>

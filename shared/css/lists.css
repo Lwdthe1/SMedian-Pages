@@ -1,0 +1,93 @@
+.smpscss_cards {
+    list-style: none;
+    list-style-image: none;
+    padding-left: 0px;
+    padding-right: 10px;
+}
+
+.smpscss_card {
+    position: relative;
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    color: rgba(0,0,0,.6);
+    padding: 2px 0;
+    text-align: left;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+    letter-spacing: 0;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.smpscss_cards--bordered>.smpscss_card {
+    border-bottom: 1px solid rgba(0,0,0,.05);
+}
+
+.smpscss_card-description {
+    font-size: 13px;
+    line-height: 1.3;
+    margin-bottom: 4px;
+}
+
+.smpscss_card-content {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 20px;
+    padding-right: 100px;
+    min-height: 80px;
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
+.smpscss_card-name {
+    font-size: 18px;
+    color: rgba(0,0,0,.8);
+    line-height: 1.1;
+    margin-bottom: 4px;
+    margin-top:0px
+}
+
+.smpscss_card .buttonSet {
+    margin-top: 10px;
+}
+
+.smpscss_masonry-grid--421 { /* Masonry container */
+    column-count: 4;
+    column-gap: 1em;
+}
+
+.smpscss_masonry-grid--321 { /* Masonry container */
+    column-count: 3;
+    column-gap: 1em;
+}
+
+.smpscss_masonry-grid-item { /* Masonry bricks or child elements */
+    display: inline-block;
+    margin: 0 0 1em;
+    width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+    .smpscss_card-content {
+        padding-right: 15px;
+    }
+    .smpscss_masonry-grid--321 {
+        column-count: 2;
+    }
+    .smpscss_masonry-grid--421 {
+        column-count: 2;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .smpscss_card-content {
+        padding-right: 15px;
+    } 
+    .smpscss_masonry-grid--321 {
+        column-count: 1;
+    }
+    .smpscss_masonry-grid--421 {
+        column-count: 1;
+    }
+}

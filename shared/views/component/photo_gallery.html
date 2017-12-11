@@ -1,0 +1,36 @@
+<div class="smpscss_component-photo-gallery js-SmedianPageComponentPhotoGallery"
+    ng-show="smedianPageComponent_photoGallery.show">
+    <a class="smpscss_clean-button smpscss_clean-button--plain js-SmedianPageComponentPhotoGallery-closeButton" 
+    style="position: absolute; top: 10px; right:10px; font-size: 24px" title="Close Photo Gallery" 
+    ng-click="smedianPageComponent_photoGallery.toggleShow()">
+        <b>×</b>
+    </a>
+    <ul class="smpscss_cards">
+        <li class="smpscss_card">
+            <h3 class="smpscss_heading--bold" target="_blank">
+                <img src="/img/logo.png" style="width: 24px; height:24px; display:inline"> Photo Gallery
+            </h3>
+            <p>
+                <button class="smpscss_clean-button smpscss_clean-button--plain smpscss_u-colorGreen js-SmedianPageComponentPhotoGallery-openImageFileSelectButton" 
+                    ng-click="smedianPageComponent_photoGallery.openImageFileSelect()" ng-show="!smedianPageComponent_photoGallery.isUploading">
+                    <strong>Upload New Image</strong>
+                </button>
+                <button class="smpscss_clean-button smpscss_clean-button--plain smpscss_u-colorBlackLight" ng-show="smedianPageComponent_photoGallery.isUploading">
+                    Uploading image. Please wait ...
+                </button>
+                <p class="smpscss_clean-text smpscss_u-colorRed" ng-show="smedianPageComponent_photoGallery.uploadError">
+                    Could not upload that image: {{smedianPageComponent_photoGallery.uploadError.message}} ...
+                </p>
+                <input class="js-SmedianPageComponentPhotoGallery-startImageUpload" style="display:none" type="file">
+            </p>
+        </li>
+        <li class="smpscss_card">
+            <div class="smpscss_masonry-grid--421">
+                <a class="smpscss_masonry-grid-item js-SmedianPageComponentPhotoGallery-selectImage" ng-repeat="image in smedianPageComponent_photoGallery.images | orderBy:'-createdAt'" 
+                    ng-click="smedianPageComponent_photoGallery.onSelectImage(image)" data-image-id="image.id">
+                    <img ng-src="{{image.url}}">
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>

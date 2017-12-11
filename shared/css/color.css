@@ -1,0 +1,19 @@
+
+.smpscss_u-colorBlackNormal {
+    color: rgba(0,0,0,.66);
+}
+.smpscss_u-colorBlackLight {
+    color: rgba(0,0,0,.44);
+}
+.smpscss_u-colorGreen {
+    color: #1abc9c !important
+}
+.smpscss_u-colorBlue {
+    color: #3498db !important
+}
+.smpscss_u-colorYellow {
+    color: #f1c40f !important
+}
+.smpscss_u-colorRed {
+    color: #e74c3c !important
+}

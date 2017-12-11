@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<!--  This site was created in Webflow. http://www.webflow.com -->
+<!--  Last Published: Tue Aug 29 2017 03:56:49 GMT+0000 (UTC)  -->
+<html ng-app="angularApp"  ng-controller="AppCtrl">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <!--for SEO: tells search engines that we are using ajax calls and so it should crawl our webapp appropriately.-->
+  <meta name="fragment" content="!">
+  <title>Page Admin | User</title>
+  <base href="/pages/templates/user/t2/admin/">
+
+  <meta content="Page Admin" name="description">
+  <meta content="Admin" property="og:title">
+  <meta content="Page Admin" property="og:description">
+  <meta content="summary" name="twitter:card">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="Webflow" name="generator">
+
+  <link rel="shortcut icon" href="/img/logo.png" type="image/x-icon">
+  <link rel="icon" href="/img/logo.png" type="image/x-icon">
+
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/main.css" rel="stylesheet" type="text/css">
+
+  <!--SMEDIAN PAGE COMPONENTS -->
+  <link href="/pages/shared/css/main.css" rel="stylesheet" type="text/css">
+
+  <!--css from root-->
+  <link href="/css/buttons.css" rel="stylesheet" type="text/css">
+  <link href="/css/u.css" rel="stylesheet" type="text/css">
+  <link href="/css/text.css" rel="stylesheet" type="text/css">
+  <link href="/css/colors.css" rel="stylesheet" type="text/css">
+
+  <!-- ============== START NPROGRESS CSS Resources ============== -->
+  <link rel="stylesheet" href="/css/libs/nprogress/nprogress.css">
+  <!-- ============== END NPROGRESS CSS Resources ============== -->   
+
+  <!-- ============== START RANGE SLIDER CSS Resources ============== -->
+  <link rel="stylesheet" href="js/lib/rangeslider.js/dist/rangeslider.css">
+  <!-- ============== END RANGE SLIDER CSS Resources ============== -->
+
+  <!--====https://github.com/rstacruz/nprogress=====-->
+  <script src="/js/libs/nprogress/nprogress.js"></script>
+  
+  <!-- Angular lib -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-cookies.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js" type="text/javascript"></script>
+  <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);
+  </script>
+  <script src="/js/main.js"></script>
+  <script src="/js/mainUtils.js"></script>
+  <script src="/js/classes/User.js"></script>
+  <script src="/js/google-tracking.js"></script>
+
+  <script src="/pages/shared/js/main.js"></script>
+</head>
+<body>
+  <div ng-include src="'/pages/shared/views/component/photo_gallery.html'"></div>
+
+  <div class="navbar" style="z-index:800">
+    <div class="container-2 w-container">
+      <div class="div-block-3">
+        <a class="link nav-link ct-l-green" ng-show="!saved" ng-click="saveChanges()"><b>Save<b></a>
+        <span>
+          <a class="link nav-link" ng-show="saved" ng-click="saveChanges()">
+            Saved <img class="u-size10x10" src="images/icon_check_grey.svg" ng-show="saved">
+          </a>
+        </span>
+        <span>
+          <a class="link nav-link" ng-show="saved" ng-href="/page/{{page.id}}/_/admin/preview" target="_blank">
+            Preview
+          </a>
+        </span>
+        <span ng-show="saved && published">
+          <a class="link nav-link" ng-show="saved" ng-href="/page/{{page.id}}" target="_blank">
+            Visit
+          </a>
+        </span>
+        <span class="u-paddingLedt10">
+          <a class="link nav-link ct-l-green" ng-show="saved && !published" ng-click="publishDraft()">
+            <b>Publish</b>
+            <img class="u-size16x16" src="images/icon_upload.svg" ng-show="saved">
+          </a>
+        </span>
+      </div>
+      <div class="div-block-2">
+        <a class="link-block-2 w-inline-block" href="#">
+          <div class="navbar-logo w-row">
+            <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2"><img class="image-3" src="/img/logo.png" width="48"></div>
+            <div class="column-3 w-col w-col-10 w-col-small-10 w-col-tiny-10">
+              <div class="text-block-2">User Admin</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div id="gjs" style="margin-top:100px"></div>
+  <div class="main-content">
+    <div class="form-container w-container">
+      <div class="admin-section">
+        <h2 class="form-heading form-heading--admin">Page Info</h2>
+        <div class="u-borderBottom" style="padding-bottom:10px" ng-show="user">
+            <div class="u-tableCell" >
+                <a class="link avatar avatar--roundedRectangle u-baseColor--link" target="_blank">
+                    <img src="{{user.imageUrl}}" class="u-borderRadius100Pct u-size60x60" alt="{{name}}">
+                </a>
+                <a class="link link--primary u-accentColor--hoverTextNormal u-fontSize20" 
+                    ng-href="http://smedian.com/writer/{{user.id}}" title="Go to {{user.name}}'s profile">
+                    {{user.name || user.username}}
+                </a>
+            </div>
+        </div>
+        <div class="form-wrapper w-form">
+          <form class="form" id="email-form" name="email-form">
+            <label class="input-field-label" >Page Id</label>
+            <input value="{{page.id}}" disabled="disabled" class="form-field w-input" type="text">
+            <label class="input-field-label" >Master Object Type</label>
+            <input value="User" disabled="disabled" class="form-field w-input" type="text">
+            <label class="input-field-label" >Master Object Id</label>
+            <input value="{{user.id}}" disabled="disabled" class="form-field w-input" type="text">
+          </form>
+        </div>
+      </div>
+
+      <h2 class="form-heading form-heading--admin u-borderBottom">Customize Page</h2>
+      <div class="admin-section">
+        <h3 class="heading heading-admin-section">Help</h3>
+        <p class="clean-text" style="text-align:left">
+          Customize your page below. Make sure to click <b>Save</b> above along the way. Once saved, you can preview your page by clicking <b>Preview</b> above. Once you're happy with your page, save it and the <b>Publish</b> button will show up above. Click <b>Publish</b> to publish your webpage publically.
+        </p>
+        <p class="clean-text" style="text-align:left">
+          To use this page as your landing page so that people visiting you at <a class="link" href="http://smedian.com/@{{user.username}}" target="_blank">Smedian.com/@{{user.username}}</a> will be sent there, go to you pages dashboard at <a class="link" href="http://smedian.com/pages/user/{{user.id}}" target="_blank">Smedian.com/pages/user/{{user.id}}</a> and click <b>Use as Landing Page</b>.
+        </p>
+        <p class="clean-text" style="text-align:left">
+          While customizing your page below, you will see some fields that ask you to enter an "image url".
+        </p>
+        <p class="clean-text" style="text-align:left">
+          Here's an article that should help you better understand what an image url is and how to get it from any image you see on the internet: 
+          <a class="link" href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&ved=0ahUKEwj50IifharWAhWph1QKHZrRD8MQFggwMAI&url=http%3A%2F%2Fwww.benchmarkemail.com%2Fhelp-FAQ%2Fanswer%2Fwhat-is-an-image-url-and-how-do-i-find-the-image-url-for-an-image-i-want-to-use-in-benchmark-email&usg=AFQjCNGMMmbUZsFDjirscpjFDB2D-Nh1fA" target="_blank">
+            How to Copy an Image's Web Address (URL)
+          </a>
+        </p>
+      </div>
+
+      <div class="admin-section">
+        <h3 class="heading heading-admin-section">Page SEO</h3>
+        <p class="clean-text" style="text-align:left">This information won't show on your page, but it will tell search engines what your page is about so that others can find you.</p>
+        <div class="form-wrapper w-form" style="margin-top:10px">
+          <form class="form" id="email-form" name="email-form">
+            <label class="input-field-label" >Page Title</label>
+            <input ng-model="page.draftData.seo.title" ng-change="onDraftDataChange()" class="form-field w-input" id="user-name-2" maxlength="256" name="user-name-2" placeholder="Name"  type="text">
+            <label class="input-field-label" >Page Description</label>
+            <textarea ng-model="page.draftData.seo.description" ng-change="onDraftDataChange()" class="form-field w-input" id="field-2" maxlength="5000" name="field-2" placeholder="Description" ></textarea>
+            <label class="input-field-label" >Page Keywords <span class="form-label-meta">(comma separated)</span></label>
+            <input ng-model="page.draftData.seo.keywords" ng-change="onDraftDataChange()" class="form-field w-input"  type="text">
+            <label class="input-field-label" >
+              Page Image Url
+              <button ng-click="openImageGallery('page.draftData.seo.imageUrl')"><img src="/img/icon_gallery.svg" class="smpscss_u-size16x16 smpscss_u-marginRight10"/></button>
+            </label>
+            <input ng-model="page.draftData.seo.imageUrl" ng-change="onDraftDataChange()" class="form-field w-input" id="user-logo-url" maxlength="256" name="user-logo-url" placeholder="https://yourwebsite.com/images/logo.png"  type="text">              
+          </form>
+        </div>
+      </div>
+
+      <div class="admin-section">
+        <h3 class="heading heading-admin-section">User Information</h3>
+        <div class="form-wrapper w-form">
+          <form class="form" id="email-form" name="email-form">
+            <input ng-model="page.draftData.about.name" ng-change="onDraftDataChange()" class="form-field w-input" id="user-name-2" maxlength="256" name="user-name-2" placeholder="Name"  type="text">
+            <textarea ng-model="page.draftData.about.description" ng-change="onDraftDataChange()" class="form-field w-input" id="field-2" maxlength="5000" name="field-2" placeholder="Description" ></textarea>
+            <label class="input-field-label" >
+              Logo Image URL
+              <button ng-click="openImageGallery('page.draftData.about.logoUrl')"><img src="/img/icon_gallery.svg" class="smpscss_u-size16x16 smpscss_u-marginRight10"/></button>
+            </label>
+            <input ng-model="page.draftData.about.logoUrl" ng-change="onDraftDataChange()" class="form-field w-input" id="user-logo-url" maxlength="256" name="user-logo-url" placeholder="https://yourwebsite.com/images/logo.png"  type="text">
+          </form>
+        </div>
+      </div>
+      <div class="admin-section">
+        <h3 class="heading heading-admin-section">Home Section</h3>
+        <div class="form-wrapper w-form">
+          <form class="form" id="email-form" name="email-form">
+            <label class="input-field-label" >Title</label>
+            <input ng-model="page.draftData.heroSection.title" ng-change="onDraftDataChange()"  class="form-field w-input" id="user-hero-title" maxlength="256" name="user-hero-title" placeholder="User Name"  type="text">
+            <label class="input-field-label">Subtitle</label>
+            <input ng-model="page.draftData.heroSection.subtitle" ng-change="onDraftDataChange()" class="form-field w-input"  id="user-hero-subtitle" maxlength="256" name="user-hero-subtitle" placeholder="User Slogan"  type="text">
+            
+            <div class="checkbox-field w-checkbox">
+              <input ng-model="page.draftData.heroSection.showLeftImage" ng-change="onDraftDataChange()" class="w-checkbox-input" id="checkbox-2" name="checkbox-2" type="checkbox">
+              <label class="form-field-checkbox-label w-form-label" >Show Left Image</label>
+            </div>
+            <label class="input-field-label">
+              Left Side &mdash; Image
+              <button ng-click="openImageGallery('page.draftData.heroSection.leftImageUrl')"><img src="/img/icon_gallery.svg" class="smpscss_u-size16x16 smpscss_u-marginRight10"/></button>
+            </label>
+            <input ng-model="page.draftData.heroSection.leftImageUrl" ng-change="onDraftDataChange()" class="form-field w-input"id="user-hero-background-image-2" maxlength="256" name="user-hero-background-image-2" placeholder="https://yourwebsite.com/images/background-image.png"  type="text">
+            <label class="input-field-label">Right Side &mdash; Background Color</label>
+            <input ng-model="page.draftData.heroSection.backgroundColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="#1abc9c"  id="pub-hero-text-color" maxlength="256" name="pub-hero-text-color" placeholder="#1abc9c"  type="text">
+            <div style="margin-top:10px">
+              <label class="input-field-label">Title Text Color</label>
+              <input ng-model="page.draftData.heroSection.titleTextColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="#555555"  type="text">
+              <label class="input-field-label">Subtitle Text Color</label>
+              <input ng-model="page.draftData.heroSection.subtitleTextColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="#555555"  type="text">
+            </div>
+
+            <h3 class="heading heading-admin-subsection">View About Button</h3>
+            <div class="checkbox-field w-checkbox">
+              <input ng-model="page.draftData.heroSection.aboutButton.show" ng-change="onDraftDataChange()" class="w-checkbox-input" id="checkbox-2" name="checkbox-2" type="checkbox">
+              <label class="form-field-checkbox-label w-form-label" >Show Button</label>
+            </div>
+            <label class="input-field-label" >Background Color</label>
+            <input ng-model="page.draftData.heroSection.aboutButton.backgroundColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="transparent" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#1abc9c"  type="text">
+            <label class="input-field-label" >Border Color</label>
+            <input ng-model="page.draftData.heroSection.aboutButton.borderColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#3498db"  type="text">
+            <label class="input-field-label" >Text Color</label>
+            <input ng-model="page.draftData.heroSection.aboutButton.textColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-3" maxlength="256" name="user-theme-color" placeholder="#555555"  type="text">
+            <label class="input-field-label" >Call to Action</label>
+            <input ng-model="page.draftData.heroSection.aboutButton.text" ng-change="onDraftDataChange()" class="form-field w-input" id="user-rtc-text" maxlength="256" name="user-rtc-text" placeholder="About Me"  type="text">
+
+            <h3 class="heading heading-admin-subsection">View Portfolio Button</h3>
+            <div class="checkbox-field w-checkbox">
+              <input ng-model="page.draftData.heroSection.featuredStoriesButton.show" ng-change="onDraftDataChange()" class="w-checkbox-input" id="checkbox-2" name="checkbox-2" type="checkbox">
+              <label class="form-field-checkbox-label w-form-label" >Show Button</label>
+            </div>
+            <label class="input-field-label" >Background Color</label>
+            <input ng-model="page.draftData.heroSection.featuredStoriesButton.backgroundColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="transparent" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#1abc9c"  type="text">
+            <label class="input-field-label" >Border Color</label>
+            <input ng-model="page.draftData.heroSection.featuredStoriesButton.borderColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#555555"  type="text">
+            <label class="input-field-label" >Text Color</label>
+            <input ng-model="page.draftData.heroSection.featuredStoriesButton.textColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-3" maxlength="256" name="user-theme-color" placeholder="#555555"  type="text">
+            <label class="input-field-label" >Call to Action</label>
+            <input ng-model="page.draftData.heroSection.featuredStoriesButton.text" ng-change="onDraftDataChange()" class="form-field w-input" id="user-rtc-text" maxlength="256" name="user-rtc-text" placeholder="Featured Stories"  type="text">
+
+            <h3 class="heading heading-admin-subsection">Contact Me Button</h3>
+            <div class="checkbox-field w-checkbox">
+              <input ng-model="page.draftData.heroSection.contactButton.show" ng-change="onDraftDataChange()" class="w-checkbox-input" id="checkbox-2" name="checkbox-2" type="checkbox">
+              <label class="form-field-checkbox-label w-form-label" >Show Button</label>
+            </div>
+            <label class="input-field-label" >Background Color</label>
+            <input ng-model="page.draftData.heroSection.contactButton.backgroundColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="transparent" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#3498db"  type="text">
+            <label class="input-field-label" >Border Color</label>
+            <input ng-model="page.draftData.heroSection.contactButton.borderColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#555555"  type="text">
+            <label class="input-field-label" >Text Color</label>
+            <input ng-model="page.draftData.heroSection.contactButton.textColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-6" maxlength="256" name="user-theme-color-6" placeholder="#555555"  type="text">
+            <label class="input-field-label" >Call to Action</label>
+            <input ng-model="page.draftData.heroSection.contactButton.text" ng-change="onDraftDataChange()" class="form-field w-input" id="user-rtc-text" maxlength="256" name="user-rtc-text" placeholder="Hire Me"  type="text">
+
+            <h3 class="heading heading-admin-subsection">Newsletter Button</h3>
+            <div class="checkbox-field w-checkbox">
+              <input ng-model="page.draftData.heroSection.newsletterButton.show" ng-change="onDraftDataChange()" class="w-checkbox-input" id="checkbox-2" name="checkbox-2" type="checkbox">
+              <label class="form-field-checkbox-label w-form-label" >Show Button</label>
+            </div>
+            <label class="input-field-label" >Background Color</label>
+            <input ng-model="page.draftData.heroSection.newsletterButton.backgroundColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="transparent" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#3498db"  type="text">
+            <label class="input-field-label" >Border Color</label>
+            <input ng-model="page.draftData.heroSection.newsletterButton.borderColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#555555"  type="text">
+            <label class="input-field-label" >Text Color</label>
+            <input ng-model="page.draftData.heroSection.newsletterButton.textColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-6" maxlength="256" name="user-theme-color-6" placeholder="#555555"  type="text">
+            <label class="input-field-label" >Call to Action</label>
+            <input ng-model="page.draftData.heroSection.newsletterButton.text" ng-change="onDraftDataChange()" class="form-field w-input" id="user-rtc-text" maxlength="256" name="user-rtc-text" placeholder="Get Newsletter"  type="text">
+          </form>
+        </div>
+
+        <!--// About Section-->
+        <div class="admin-section">
+          <h3 class="heading heading-admin-section">About Section</h3>
+          <div class="form-wrapper w-form">
+            <form class="form" id="email-form" name="email-form">
+              <div class="checkbox-field w-checkbox">
+                <input ng-model="page.draftData.aboutSection.show" ng-change="onDraftDataChange()" class="w-checkbox-input" id="checkbox-2" name="checkbox-2" type="checkbox">
+                <label class="form-field-checkbox-label w-form-label" >Show Section</label>
+              </div>
+              <label class="input-field-label" >Title</label>
+              <input ng-model="page.draftData.aboutSection.title" ng-change="onDraftDataChange()" class="form-field w-input" id="user-rtc-text" maxlength="256" name="user-rtc-text" placeholder="About Me"  type="text">
+              <label class="input-field-label" >Subtitle</label>
+              <input ng-model="page.draftData.aboutSection.subtitle" ng-change="onDraftDataChange()" class="form-field w-input" id="user-rtc-text" maxlength="256" name="user-rtc-text" placeholder="I Write Interesting Things"  type="text">
+              <label class="input-field-label" >Bio</label>
+              <textarea ng-model="page.draftData.aboutSection.description" ng-change="onDraftDataChange()" class="form-field w-input" id="about-description" maxlength="5000" name="about-description" placeholder="Description" ></textarea>
+              
+              <div class="checkbox-field w-checkbox">
+                <input ng-model="page.draftData.aboutSection.showLeftImage" ng-change="onDraftDataChange()" class="w-checkbox-input" id="checkbox-2" name="checkbox-2" type="checkbox">
+                <label class="form-field-checkbox-label w-form-label" >Show Left Image</label>
+              </div>
+              <label class="input-field-label">
+                Left Side &mdash; Image
+                <button ng-click="openImageGallery('page.draftData.aboutSection.leftImageUrl')"><img src="/img/icon_gallery.svg" class="smpscss_u-size16x16 smpscss_u-marginRight10"/></button>
+              </label>
+              <input ng-model="page.draftData.aboutSection.leftImageUrl" ng-change="onDraftDataChange()" class="form-field w-input"id="user-hero-background-image-2" maxlength="256" name="user-hero-background-image-2" placeholder="https://yourwebsite.com/images/background-image.png"  type="text">
+              
+              <label class="input-field-label">Right Side &mdash; Background Color</label>
+              <input ng-model="page.draftData.aboutSection.backgroundColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="#1abc9c"  id="pub-hero-text-color" maxlength="256" name="pub-hero-text-color" placeholder="#1abc9c"  type="text">
+              <div style="margin-top:10px">
+                <label class="input-field-label">Title Text Color</label>
+                <input ng-model="page.draftData.aboutSection.titleTextColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="#555555"  type="text">
+                <label class="input-field-label">Subtitle Text Color</label>
+                <input ng-model="page.draftData.aboutSection.subtitleTextColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="#555555"  type="text">
+                <label class="input-field-label">Normal Text Color</label>
+                <input ng-model="page.draftData.aboutSection.textColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="#555555"  type="text">
+              </div>
+
+              <h3 class="heading heading-admin-subsection">Back Button</h3>
+              <label class="input-field-label" >Background Color</label>
+              <input ng-model="page.draftData.aboutSection.backButton.backgroundColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="transparent" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#3498db"  type="text">
+              <label class="input-field-label" >Border Color</label>
+              <input ng-model="page.draftData.aboutSection.backButton.borderColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#555555"  type="text">
+              <label class="input-field-label" >Text Color</label>
+              <input ng-model="page.draftData.aboutSection.backButton.textColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-6" maxlength="256" name="user-theme-color-6" placeholder="#555555"  type="text">
+
+              <h3 class="heading heading-admin-subsection">Skills</h3>
+              <div class="checkbox-field w-checkbox">
+                <input ng-model="page.draftData.aboutSection.showSkills" ng-change="onDraftDataChange()" class="w-checkbox-input" id="checkbox-2" name="checkbox-2" type="checkbox">
+                <label class="form-field-checkbox-label w-form-label" >Show Skills</label>
+              </div>
+              <div class="form-fields-row w-row">
+                <div class="column-12 w-col w-col-12" style="margin-bottom:10px"
+                  ng-repeat="skill in page.draftData.aboutSection.skills | orderBy:'' track by $index">
+                  <label class="input-field-label" ><b>#{{$index + 1}}</b> Name</label>
+                  <input ng-model="skill.name" ng-change="onDraftDataChange()" class="form-field w-input"id="user-footer-link--display-text" maxlength="256" name="user-footer-link--display-text" placeholder="What do you call this skill?" type="text">
+                  <label class="input-field-label" >Description</label>
+                  <input ng-model="skill.description" ng-change="onDraftDataChange()" class="form-field w-input" id="user-footer-link-4" maxlength="256" name="user-footer-link-4" placeholder="Explain this skill and why it matters to you or potential employers ..." type="text">
+                  <label class="input-field-label" >Your Level: {{skill.levelOutOf100Pct}}%</label>
+                  <input id="js-skillLevel--{{skill.name}}" type="range" min="10" max="100" step="1" value="10" data-orientation="horizontal" style="width:33%; display:inline"
+                            ng-model="skill.levelOutOf100Pct" ng-change="onDraftDataChange()">
+                  
+                  <button class="clean-button clean-button--plain ct-l-red" style="display:block" ng-click="removeSkill(skill)">
+                    Remove
+                  </button>
+                </div>
+              </div>
+              <button class="clean-button clean-button--small" style="margin-top:15px" ng-show="page.draftData.aboutSection.skills.length < 10" ng-click="addContainerFor('skills')">
+                Add Another
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!--// Featured Stores -->
+      <div class="admin-section">
+        <h3 class="heading heading-admin-section">Featured Stories</h3>
+        <div class="form-wrapper w-form">
+          <div class="form">
+            <div class="checkbox-field w-checkbox">
+              <input ng-model="page.draftData.featuredStoriesSection.show" ng-change="onDraftDataChange()" class="w-checkbox-input"  id="checkbox-2" name="checkbox-2" type="checkbox">
+              <label class="form-field-checkbox-label w-form-label" >Show Section</label>
+            </div>
+            <label class="input-field-label" >Title</label>
+            <input ng-model="page.draftData.featuredStoriesSection.title" ng-change="onDraftDataChange()"  class="form-field w-input" id="user-hero-title" maxlength="256" name="user-hero-title" placeholder="Featured Stories"  type="text">
+            <label class="input-field-label">Subtitle</label>
+            <input ng-model="page.draftData.featuredStoriesSection.subtitle" ng-change="onDraftDataChange()" class="form-field w-input"  id="user-hero-subtitle" maxlength="256" name="user-hero-subtitle" placeholder="These are my featured stories"  type="text">
+            <label class="input-field-label">Description</label>
+            <input ng-model="page.draftData.featuredStoriesSection.description" ng-change="onDraftDataChange()" class="form-field w-input"  id="user-hero-subtitle" maxlength="256" name="user-hero-subtitle" placeholder="Describe your work."  type="text">
+
+            <label class="input-field-label">Right Side &mdash; Background Color</label>
+            <input ng-model="page.draftData.featuredStoriesSection.backgroundColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="#1abc9c"  id="pub-hero-text-color" maxlength="256" name="pub-hero-text-color" placeholder="#1abc9c"  type="text">
+            <div style="margin-top:10px">
+              <label class="input-field-label">Title Text Color</label>
+              <input ng-model="page.draftData.featuredStoriesSection.titleTextColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="#555555"  type="text">
+              <label class="input-field-label">Normal Text Color</label>
+              <input ng-model="page.draftData.featuredStoriesSection.textColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="#555555"  type="text">
+            </div>
+
+            <h3 class="heading heading-admin-subsection">Back Button</h3>
+            <label class="input-field-label" >Background Color</label>
+            <input ng-model="page.draftData.featuredStoriesSection.backButton.backgroundColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="transparent" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#3498db"  type="text">
+            <label class="input-field-label" >Border Color</label>
+            <input ng-model="page.draftData.featuredStoriesSection.backButton.borderColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#555555"  type="text">
+            <label class="input-field-label" >Text Color</label>
+            <input ng-model="page.draftData.featuredStoriesSection.backButton.textColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-6" maxlength="256" name="user-theme-color-6" placeholder="#555555"  type="text">
+            
+            <h3 class="heading heading-admin-subsection">Stories</h3>
+            <div class="form-fields-row w-row">
+              <div class="column-3 w-col w-col-3" style="margin-right:5px" 
+                ng-repeat="featuredStory in page.draftData.featuredStoriesSection.stories | orderBy:'position'">
+                <label class="input-field-label" ><b>#{{featuredStory.position + 1}}</b> Story</label>
+                <input ng-model="featuredStory.url" ng-change="onDraftDataChange(); getFeaturedMediumArticleData(featuredStory)" class="form-field w-input" id="user-featured-story-url-12" maxlength="256" name="user-featured-story-url-12" placeholder="https://medium.com/..."  type="text">
+                <input ng-model="featuredStory.title" ng-change="onDraftDataChange()" class="form-field w-input" id="user-featured-story-url-12" maxlength="256" name="user-featured-story-url-12" placeholder="Title"  type="text">
+                <input ng-model="featuredStory.description" ng-change="onDraftDataChange()" class="form-field w-input" id="user-featured-story-url-12" maxlength="256" name="user-featured-story-url-12" placeholder="Description"  type="text">
+                <input ng-model="featuredStory.imageUrl" ng-change="onDraftDataChange()" class="form-field w-input" id="user-featured-story-url-12" maxlength="256" name="user-featured-story-url-12" placeholder="http://example.com/images/example.png"  type="text">
+                <img ng-src="featuredStory.imageUrl" ng-show="featuredStory.imageUrl.length">
+                <button class="clean-button clean-button--plain" ng-click="openImageGallery('story', featuredStory)"><img src="/img/icon_gallery.svg" class="smpscss_u-size16x16 smpscss_u-marginRight10"/></button>
+                <i class="clean-text text-s ct-l-green" style="margin-top:5px; margin-bottom:10px" ng-show="fetchingFeatureStoryUrls[featuredStory.url.trim()]">
+                  Loading title, description, and image url ...
+                </i>
+                <button class="clean-button clean-button--plain ct-l-red" ng-click="removeFeaturedStory(featuredStory)">
+                  Remove
+                </button>
+              </div>
+            </div>
+            <button class="clean-button clean-button--small" style="margin-top:10px"
+              ng-show="page.draftData.featuredStoriesSection.stories.length < 100"
+              ng-click="addContainerFor('featuredStories')">
+              Add Another Story
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!--// Newsletter Form -->
+      <div class="admin-section">
+        <h3 class="heading heading-admin-section">Newsletter Form</h3>
+        <div class="form-wrapper w-form">
+          <form class="form" id="email-form" name="email-form">
+            <div class="checkbox-field w-checkbox">
+              <input ng-model="page.draftData.newsletterForm.show" ng-change="onDraftDataChange()" class="w-checkbox-input"  id="checkbox-2" name="checkbox-2" type="checkbox">
+              <label class="form-field-checkbox-label w-form-label" >Show Form</label>
+            </div>
+            <label class="input-field-label" >Title</label>
+            <input ng-model="page.draftData.newsletterForm.title" ng-change="onDraftDataChange()"  class="form-field w-input" id="user-hero-title" maxlength="256" name="user-hero-title" placeholder="Contact Me"  type="text">
+            <label class="input-field-label">Description</label>
+            <input ng-model="page.draftData.newsletterForm.description" ng-change="onDraftDataChange()" class="form-field w-input"  id="user-hero-subtitle" maxlength="256" name="user-hero-subtitle" placeholder="Describe your newsletter"  type="text">
+            
+            <h3 class="heading heading-admin-subsection">Left Side</h3>
+            <div class="checkbox-field w-checkbox">
+              <input ng-model="page.draftData.newsletterForm.showLeftImage" ng-change="onDraftDataChange()" class="w-checkbox-input" id="checkbox-2" name="checkbox-2" type="checkbox">
+              <label class="form-field-checkbox-label w-form-label" >Show</label>
+            </div>
+            <label class="input-field-label">Image <button ng-click="openImageGallery('page.draftData.newsletterForm.leftImageUrl')"><img src="/img/icon_gallery.svg" class="smpscss_u-size16x16 smpscss_u-marginRight10"/></button></label>
+            <input ng-model="page.draftData.newsletterForm.leftImageUrl" ng-change="onDraftDataChange()" class="form-field w-input"id="user-hero-background-image-2" maxlength="256" name="user-hero-background-image-2" placeholder="https://yourwebsite.com/images/background-image.png"  type="text">
+
+            <h3 class="heading heading-admin-subsection">Right Side</h3>
+            <label class="input-field-label">Background Color</label>
+            <input ng-model="page.draftData.newsletterForm.backgroundColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="#1abc9c"  id="pub-hero-text-color" maxlength="256" name="pub-hero-text-color" placeholder="#1abc9c"  type="text">
+            <div style="margin-top:10px">
+              <label class="input-field-label">Title Text Color</label>
+              <input ng-model="page.draftData.newsletterForm.titleTextColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="#555555"  type="text">
+              <label class="input-field-label">Normal Text Color</label>
+              <input ng-model="page.draftData.newsletterForm.textColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="#555555"  type="text">
+            </div>
+
+            <h3 class="heading heading-admin-subsection">Back Button</h3>
+            <label class="input-field-label" >Background Color</label>
+            <input ng-model="page.draftData.newsletterForm.backButton.backgroundColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="transparent" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#3498db"  type="text">
+            <label class="input-field-label" >Border Color</label>
+            <input ng-model="page.draftData.newsletterForm.backButton.borderColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#555555"  type="text">
+            <label class="input-field-label" >Text Color</label>
+            <input ng-model="page.draftData.newsletterForm.backButton.textColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-6" maxlength="256" name="user-theme-color-6" placeholder="#555555"  type="text">
+
+            <h3 class="heading heading-admin-subsection">Submit Button</h3>
+            <label class="input-field-label" >Text</label>
+            <input ng-model="page.draftData.newsletterForm.submitButton.text" ng-change="onDraftDataChange()" class="form-field w-input" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="Sign Up"  type="text">
+            <label class="input-field-label" >Background Color</label>
+            <input ng-model="page.draftData.newsletterForm.submitButton.backgroundColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="1abc9c" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="#1abc9c"  type="text">
+            <label class="input-field-label" >Border Color</label>
+            <input ng-model="page.draftData.newsletterForm.submitButton.borderColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#555555"  type="text">
+            <label class="input-field-label" >Text Color</label>
+            <input ng-model="page.draftData.newsletterForm.submitButton.textColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-6" maxlength="256" name="user-theme-color-6" placeholder="#555555"  type="text">
+
+            <h3 class="heading heading-admin-subsection">On Submit Success</h3>
+            <label class="input-field-label" >Success Title</label>
+            <input ng-model="page.draftData.newsletterForm.successTitle" ng-change="onDraftDataChange()" class="form-field w-input" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="Thanks for Signing Up"  type="text">
+            <label class="input-field-label" >Success Text</label>
+            <input ng-model="page.draftData.newsletterForm.successText" ng-change="onDraftDataChange()" class="form-field w-input" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="We'll be in touch soon!"  type="text">
+            <label class="input-field-label" >
+              Success Image Url 
+              <button ng-click="openImageGallery('page.draftData.newsletterForm.successImageUrl')"><img src="/img/icon_gallery.svg" class="smpscss_u-size16x16 smpscss_u-marginRight10"/></button>
+            </label>
+            <input ng-model="page.draftData.newsletterForm.successImageUrl" ng-change="onDraftDataChange()" class="form-field w-input" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="http://example.com/images/example.png"  type="text">
+            <label class="input-field-label" >Success Link Url</label>
+            <input ng-model="page.draftData.newsletterForm.successCTAUrl" ng-change="onDraftDataChange()" class="form-field w-input" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="http://myfreebook.com"  type="text">
+            <label class="input-field-label" >Success Link Text</label>
+            <input ng-model="page.draftData.newsletterForm.successCTAText" ng-change="onDraftDataChange()" class="form-field w-input" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="Get Our Free E-Book"  type="text">
+            <div class="checkbox-field w-checkbox">
+              <input ng-model="page.draftData.newsletterForm.includeNameField" ng-change="onDraftDataChange()" class="w-checkbox-input" id="checkbox-2" name="checkbox-2" type="checkbox">
+              <label class="form-field-checkbox-label w-form-label" >Include Name Field</label>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!--// Email Form -->
+      <div class="admin-section">
+        <h3 class="heading heading-admin-section">Email Contact Form</h3>
+        <div class="form-wrapper w-form">
+          <form class="form" id="email-form" name="email-form">
+            <div class="checkbox-field w-checkbox">
+              <input ng-model="page.draftData.contactForm.show" ng-change="onDraftDataChange()" class="w-checkbox-input"  id="checkbox-2" name="checkbox-2" type="checkbox">
+              <label class="form-field-checkbox-label w-form-label" >Show Form</label>
+            </div>
+
+            <label class="input-field-label" >Recipient Email</label>
+            <input ng-model="page.draftData.contactForm.recipientEmail" ng-change="onDraftDataChange()" class="form-field w-input" id="user-hero-background-image-2" maxlength="256" name="user-hero-background-image-2" placeholder="yourname@company.com"  type="email">
+
+            <label class="input-field-label" >Title</label>
+            <input ng-model="page.draftData.contactForm.title" ng-change="onDraftDataChange()"  class="form-field w-input" id="user-hero-title" maxlength="256" name="user-hero-title" placeholder="Contact Me"  type="text">
+            <label class="input-field-label">Instructions</label>
+            <input ng-model="page.draftData.contactForm.description" ng-change="onDraftDataChange()" class="form-field w-input"  id="user-hero-subtitle" maxlength="256" name="user-hero-subtitle" placeholder="Let's work together. Submit your details in this form and I will get back to you ASAP."  type="text">
+            
+            <h3 class="heading heading-admin-subsection">Left Side</h3>
+            <div class="checkbox-field w-checkbox">
+              <input ng-model="page.draftData.contactForm.showLeftImage" ng-change="onDraftDataChange()" class="w-checkbox-input" id="checkbox-2" name="checkbox-2" type="checkbox">
+              <label class="form-field-checkbox-label w-form-label" >Show</label>
+            </div>
+            <label class="input-field-label">Image 
+              <button ng-click="openImageGallery('page.draftData.contactForm.leftImageUrl')"><img src="/img/icon_gallery.svg" class="smpscss_u-size16x16 smpscss_u-marginRight10"/></button>
+            </label>
+            <input ng-model="page.draftData.contactForm.leftImageUrl" ng-change="onDraftDataChange()" class="form-field w-input"id="user-hero-background-image-2" maxlength="256" name="user-hero-background-image-2" placeholder="https://yourwebsite.com/images/background-image.png"  type="text">
+
+            <h3 class="heading heading-admin-subsection">Right Side</h3>
+            <label class="input-field-label">Background Color</label>
+            <input ng-model="page.draftData.contactForm.backgroundColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="#1abc9c"  id="pub-hero-text-color" maxlength="256" name="pub-hero-text-color" placeholder="#1abc9c"  type="text">
+            <div style="margin-top:10px">
+              <label class="input-field-label">Title Text Color</label>
+              <input ng-model="page.draftData.contactForm.titleTextColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="#555555"  type="text">
+              <label class="input-field-label">Normal Text Color</label>
+              <input ng-model="page.draftData.contactForm.textColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="#555555"  type="text">
+            </div>
+
+            <h3 class="heading heading-admin-subsection">Back Button</h3>
+            <label class="input-field-label" >Background Color</label>
+            <input ng-model="page.draftData.contactForm.backButton.backgroundColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="transparent" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#3498db"  type="text">
+            <label class="input-field-label" >Border Color</label>
+            <input ng-model="page.draftData.contactForm.backButton.borderColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="cccccc" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#cccccc"  type="text">
+            <label class="input-field-label" >Text Color</label>
+            <input ng-model="page.draftData.contactForm.backButton.textColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-6" maxlength="256" name="user-theme-color-6" placeholder="#555555"  type="text">
+
+            <h3 class="heading heading-admin-subsection">Form Fields</h3>
+            <div class="checkbox-field w-checkbox">
+              <input ng-model="page.draftData.contactForm.includeSubjectField" ng-change="onDraftDataChange()" class="w-checkbox-input" id="checkbox-2" name="checkbox-2" type="checkbox">
+              <label class="form-field-checkbox-label w-form-label" >Include Subject Field</label>
+            </div>
+            <div ng-show="page.draftData.contactForm.includeSubjectField">
+              <label class="input-field-label">Subject Field Placeholder</label>
+              <input ng-model="page.draftData.contactForm.subjectFieldPlaceholder" ng-change="onDraftDataChange()" class="form-field w-input"  id="user-hero-subtitle" maxlength="256" name="user-hero-subtitle" placeholder="Subject"  type="text">
+            </div>
+            <label class="input-field-label">Message Field Placeholder</label>
+            <input ng-model="page.draftData.contactForm.messageFieldPlaceholder" ng-change="onDraftDataChange()" class="form-field w-input"  id="user-hero-subtitle" maxlength="256" name="user-hero-subtitle" placeholder="Message"  type="text">
+            
+            <h3 class="heading heading-admin-subsection">Submit Button</h3>
+            <label class="input-field-label" >Text</label>
+            <input ng-model="page.draftData.contactForm.submitButton.text" ng-change="onDraftDataChange()" class="form-field w-input" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="Send Message"  type="text">
+            <label class="input-field-label" >Background Color</label>
+            <input ng-model="page.draftData.contactForm.submitButton.backgroundColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="1abc9c" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="#1abc9c"  type="text">
+            <label class="input-field-label" >Border Color</label>
+            <input ng-model="page.draftData.contactForm.submitButton.borderColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-5" maxlength="256" name="user-theme-color-5" placeholder="#555555"  type="text">
+            <label class="input-field-label" >Text Color</label>
+            <input ng-model="page.draftData.contactForm.submitButton.textColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="555555" id="user-theme-color-6" maxlength="256" name="user-theme-color-6" placeholder="#555555"  type="text">
+            
+            <h3 class="heading heading-admin-subsection">On Submit Success</h3>
+            <label class="input-field-label" >Success Title</label>
+            <input ng-model="page.draftData.contactForm.successTitle" ng-change="onDraftDataChange()" class="form-field w-input" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="Thanks for Contacting Me"  type="text">
+            <label class="input-field-label" >Success Text</label>
+            <input ng-model="page.draftData.contactForm.successText" ng-change="onDraftDataChange()" class="form-field w-input" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="We'll be in touch soon!"  type="text">
+            <label class="input-field-label" >Success Image Url 
+              <button ng-click="openImageGallery('page.draftData.contactForm.successImageUrl')"><img src="/img/icon_gallery.svg" class="smpscss_u-size16x16 smpscss_u-marginRight10"/></button>
+            </label>
+            <input ng-model="page.draftData.contactForm.successImageUrl" ng-change="onDraftDataChange()" class="form-field w-input" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="http://example.com/images/example.png"  type="text">
+            <label class="input-field-label" >Success Link Url</label>
+            <input ng-model="page.draftData.contactForm.successCTAUrl" ng-change="onDraftDataChange()" class="form-field w-input" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="http://myfreebook.com"  type="text">
+            <label class="input-field-label" >Success Link Text</label>
+            <input ng-model="page.draftData.contactForm.successCTAText" ng-change="onDraftDataChange()" class="form-field w-input" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="Get Our Free E-Book"  type="text">
+          </form>
+        </div>
+      </div>
+
+      <!--// Social Links -->
+      <div class="admin-section">
+        <h3 class="heading heading-admin-section">Social Links</h3>
+        <div class="form-wrapper w-form">
+          <form class="form" id="email-form" name="email-form">
+            <div class="form-fields-row w-row">
+              <div class="column-3 w-col w-col-3" style="margin-right:5px; margin-bottom:10px"
+                ng-repeat="socialLink in page.draftData.socialLinks">
+                <label class="input-field-label" >{{socialLink.name}}</label>
+                <input ng-model="socialLink.url" ng-change="onDraftDataChange()" class="form-field w-input" placeholder="{{socialLink.inputPlaceholder}}" type="text">
+                <div class="checkbox-field w-checkbox">
+                  <input ng-model="socialLink.showInHeroSection" ng-change="onDraftDataChange()" class="w-checkbox-input" id="checkbox-2" name="checkbox-2" type="checkbox">
+                  <label class="form-field-checkbox-label w-form-label" >Show in Hero Section</label>
+                </div>
+                <div class="checkbox-field w-checkbox">
+                  <input ng-model="socialLink.showInAboutSection" ng-change="onDraftDataChange()" class="w-checkbox-input" id="checkbox-2" name="checkbox-2" type="checkbox">
+                  <label class="form-field-checkbox-label w-form-label" >Show in About Section</label>
+                </div>
+                <div class="checkbox-field w-checkbox">
+                  <input ng-model="socialLink.showInFeaturedStoriesSection" ng-change="onDraftDataChange()" class="w-checkbox-input" id="checkbox-2" name="checkbox-2" type="checkbox">
+                  <label class="form-field-checkbox-label w-form-label" >Show in Featured Stories Section</label>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!--// Footer -->
+      <div class="admin-section">
+        <h2 class="heading heading-admin-section">Footer Section</h2>
+        <div class="form-wrapper">
+          <form class="form" id="email-form" name="email-form">
+            <label class="input-field-label">Copyright Text</label>
+            <input ng-model="page.draftData.footerSection.copyrightText" ng-change="onDraftDataChange()" class="form-field w-input"id="user-hero-background-image-2" maxlength="256" name="user-hero-background-image-2" placeholder="Your Name"  type="text">
+            <label class="input-field-label">Text Color</label>
+            <input ng-model="page.draftData.footerSection.textColor" ng-change="onDraftDataChange()" class="form-field w-input jscolor" value="ffffff" id="user-theme-color-4" maxlength="256" name="user-theme-color-4" placeholder="#ffffff"  type="text">
+            <h3 class="heading heading-admin-subsection">Links</h3>
+            <div class="form-fields-row w-row">
+              <div class="column-4 w-col w-col-4" style="margin-right:5px"
+                ng-repeat="footerLink in page.draftData.footerSection.links">
+                <label class="input-field-label" >Link Display Text</label>
+                <input ng-model="footerLink.text" ng-change="onDraftDataChange()" class="form-field w-input"id="user-footer-link--display-text" maxlength="256" name="user-footer-link--display-text" placeholder="User Name" type="text">
+                <label class="input-field-label" >Link URL</label>
+                <input ng-model="footerLink.url" ng-change="onDraftDataChange()" class="form-field w-input" id="user-footer-link-4" maxlength="256" name="user-footer-link-4" placeholder="https://www.medium.com/@username" type="text">
+                <button class="clean-button clean-button--plain ct-l-red" ng-click="removeFooterLink(footerLink)">
+                  Remove
+                </button>
+              </div>
+            </div>
+            <button class="clean-button clean-button--small" style="margin-top:10px" ng-show="page.draftData.footerSection.links.length < 3" ng-click="addContainerFor('footerLinks')">
+              Add Another
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--==========================START BELOW THE FOLD SCRIPTS===================-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
+  <script src="js/lib/jscolor/jscolor.js"></script>
+  <!--RANGE SLIDER-->
+  <script src="js/lib/rangeslider.js/dist/rangeslider.min.js"></script>
+  <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+
+  <!-- ================= START ANGULAR APP DEPENDENDCIES ================== -->
+  <!-- ================= START ANGULAR APP DEPENDENDCIES ================== -->
+
+  <!--http://socket.io/ Needed for angular-socket-io to work-->
+  <script src="/js/libs/socket-io/socket.io-1.4.5.js"></script>
+  <!--https://github.com/krimple/angular-socketio-chat/tree/master/angular-frontend/app/bower_components/angular-socket-io && https://github.com/btford/angular-socket-io-->
+  <script src="/js/libs/angular-socket-io/socket.js"></script>
+
+  <!--SMEDIAN PAGE COMPONENTS -->
+  <script src="/pages/shared/js/components/PhotoGallery.js"></script>
+
+  <!-- ================= END ANGULAR APP DEPENDENDCIES ================== -->
+  <!-- ================= END ANGULAR APP DEPENDENDCIES ================== -->
+
+  <!-- ================= START ANGULAR APP SCRIPTS ================== -->
+  <!-- ================= START ANGULAR APP SCRIPTS ================== -->
+
+  <!--APP-->
+  <script src="/js/app/MainApp.js"></script>
+  <script src="js/app/app.js"></script>
+  <!--APP FILTERS-->
+  <script src="js/app/filters.js"></script>
+  <!--APP SERVICES-->
+  <script src="/pages/shared/js/app/services/pageAdminService.js"></script>
+  <script src="js/app/services/socketIOService.js"></script>
+  <!--APP CONTROLLERS-->
+  <script src="js/app/controllers/adminController.js"></script>
+
+  <!-- ================= END ANGULAR APP SCRIPTS ================== -->
+  <!-- ================= END ANGULAR APP SCRIPTS ================== -->
+
+  <!-- =================== END BELOW FOLD SCRIPTS =================== -->
+  <!-- =================== END BELOW FOLD SCRIPTS =================== -->
+
+  <script id="ssr-cdata" type="text/javascript">var __ssr__CData = 0/*<<|cdata|>>*/;</script>
+</body>
+</html>

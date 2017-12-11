@@ -1,0 +1,23 @@
+.smpscss_u-size16x16 {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+.smpscss_u-size32x32 {
+    width: 32px !important;
+    height: 32px !important;
+}
+
+.smpscss_u-size64x64 {
+    width: 64px !important;
+    height: 64px !important;
+}
+
+.smpscss_u-size128x128 {
+    width: 128px !important;
+    height: 128px !important;
+}
+
+.smpscss_u-marginRight10 {
+    margin-right: 10px !important;
+}

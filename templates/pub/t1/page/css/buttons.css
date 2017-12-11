@@ -1,0 +1,197 @@
+button {
+    outline:none !important;
+  }
+  
+  .button--filled, .button--primary.button--withChrome.is-active {
+      background: #02b875;
+      border-color: #02b875;
+  }
+  
+  .button--primary {
+      border-color: #02b875;
+  }
+  
+  .button--primary, .button--primary .label, .button--primary.button--link {
+      color: #00ab6b;
+  }
+  
+  .button--small {
+      height: 32px;
+      line-height: 30px;
+      padding: 0 14px;
+      font-size: 12px;
+  }
+  
+  .button--withIconAndLabel {
+      line-height: 35px;
+  }
+  
+  .button {
+      line-height: 35px;
+  }
+  
+  .button {
+      display: inline-block;
+      position: relative;
+      height: 37px;
+      padding: 0 16px;
+      color: rgba(0,0,0,.44);
+      background: rgba(0,0,0,0);
+      font-size: 14px;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid rgba(0,0,0,.15);
+      vertical-align: bottom;
+      white-space: nowrap;
+      text-rendering: auto;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      box-sizing: border-box;
+      border-radius: 999em;
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+      letter-spacing: 0;
+      font-weight: 400;
+      font-style: normal;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      -moz-font-feature-settings: "liga" on;
+  }
+  
+  .clean-button {
+    display: inline-block;
+    height: 37px;
+    padding: 0 16px !important;
+    margin:5px;
+    color: rgba(0,0,0,.44);
+    background: rgba(0,0,0,0);
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,.15);
+    vertical-align: bottom;
+    white-space: nowrap;
+    text-rendering: auto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    box-sizing: border-box;
+    border-radius: 999em;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+    letter-spacing: 0;
+    font-weight: 400;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "liga" on;
+    outline:none !important;
+  
+    -webkit-transition: all 0.2s cubic-bezier(0.42, 0, 0.58, 1);
+    -moz-transition: all 0.2s cubic-bezier(0.42, 0, 0.58, 1);
+    -ms-transition: all 0.2s cubic-bezier(0.42, 0, 0.58, 1);
+    -o-transition: all 0.2s cubic-bezier(0.42, 0, 0.58, 1);
+    transition: all 0.2s cubic-bezier(0.42, 0, 0.58, 1);
+  }
+  
+  .clean-button--small {
+      height: auto;
+      margin: 0 5px 0 5px;
+  }
+  
+  .clean-button--link {
+      height: auto;
+      margin: 0 5px 0 5px;
+      text-decoration: none !important;
+      line-height: 30px;
+  }
+  
+  .clean-button--plain {
+      color:initial !important;
+      margin:0px;
+      padding: 0px !important;
+      border:none;
+      text-decoration: none !important;
+  }
+  
+  .clean-button:hover {
+    color: rgba(0,0,0,.8);
+  }
+  
+  .clean-button:disabled {
+      opacity: 0.5;
+  }
+  
+  .clean-button--danger {
+      color: #fff !important;
+      background: #e74c3c !important;
+      border-color: #e74c3c !important;
+  }
+  
+  .clean-button--success {
+      color: #fff !important;
+      background: #1abc9c !important;
+      border-color: #1abc9c !important;
+  }
+  
+  .clean-button--green {
+      color: #fff !important;
+      background: #1abc9c !important;
+      border-color: #1abc9c !important;
+  }
+  
+  .clean-button--yellow {
+      color: #fff !important;
+      background: #f1c40f !important;
+      border-color: #f1c40f !important;
+  }
+  
+  .login-button {
+      color: #fff !important;
+      background: #f1c40f !important;
+      border-color: #f1c40f !important;
+  }
+  
+  .action-404-button {
+      color: #fff !important;
+      background: #1abc9c !important;
+      border-color: #1abc9c !important;
+  }
+  
+  .clean-button--green {
+      color: #fff !important;
+      background: #1abc9c !important;
+      border-color: #1abc9c !important;
+  }
+  
+  .clean-button--yellow {
+      color: #fff !important;
+      background: #f1c40f !important;
+      border-color: #f1c40f !important;
+  }
+  
+  .clean-button--blue {
+      color: #fff !important;
+      background: #3498db !important;
+      border-color: #3498db !important;
+  }
+  
+  .clean-button--blue-outline {
+      color: #3498db !important;
+      border-color: #3498db !important;
+  }
+  
+  .clean-button--white {
+      color: initial !important;
+      background: #fff !important;
+      border-color: #fff !important;
+  }
+  
+  .clickable {
+      cursor: pointer
+  }
