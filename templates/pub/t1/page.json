@@ -1,0 +1,35 @@
+{
+    "id": "pub_t1",
+    "entityType": "pub",
+    "version": "1.0",
+    "title": "Title",
+    "description": "long text",
+    "card": {
+        "title": "Title",
+        "description": "long text",
+        "imageAbsolutePath": "/thumb_image.png"
+    },
+    "editorIndexAbsolutePath": "/admin/admin-index.hbs",
+    "demoIndexAbsolutePath": "/preview/preview-index.hbs",
+    "developer": {
+        "smedianId": "5927167c5fbc457423b17612",
+        "name": "Lincoln W Daniel",
+        "url": "http://lincolnwdaniel.com"
+    },
+    "keywords": [
+        "writer"
+    ],
+    "customizableUnits": [
+        "Color"
+    ],
+    "customizationDifficulty": "Easy",
+    "language": {
+        "id": "angular",
+        "version": ""
+    },
+    "hooks": {
+        "beforeSaveScript": "/",
+        "serverSideRenderScript": "/"
+    }
+}
+  
