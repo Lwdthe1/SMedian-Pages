@@ -1,5 +1,5 @@
 
-SmedianPagesUtilManager.PageAdminNetworkService = function() {
+SmedianPages.service.AdminNetworkService = function() {
     var apiRequestsPromisesCache = {}
     const $ = new SmedianPagesUtilManager.NetworkService()
     

@@ -1,72 +1,116 @@
-const SMedianPageComponentPhotoGallery = function(config) {
+SmedianPages.component.PhotoGallery = function(config) {
     if(!config) throw new Error('[SMedianPageComponentPhotoGallery] config data is required')
-    if(!config.angularScope) throw new Error('[SMedianPageComponentActionsMenu] angularScope is required')
-    if(!config.angularScopeUIUpdator) throw new Error('[SMedianPageComponentActionsMenu] angularScopeUIUpdator is required')
-    if (!config.PageAdminService) throw new Error('[SMedianPageComponentPhotoGallery] PageAdminService is required.')
-    if (!config.PageAdminService.uploadImage) throw new Error('[SMedianPageComponentPhotoGallery] PageAdminService must have an uploadImage method.')
     
     const self = this
-    const $scope = config.angularScope
-    const PageAdminService = config.PageAdminService
-    const angularScopeUIUpdator = config.angularScopeUIUpdator
+    const _adminNetworkService = SmedianPages.service.AdminNetworkService
 
-    const imageIdsMap = {}
+    const _imageIdsMap = {}
     const _images = []
-    this.images = _images
-    this.addImage = addImage
-    function addImage(image) {
+
+    this.getImges = () => _images
+    this.addImage = _addImage
+
+    function _addImage(image) {
         if(!image) return
-        if(imageIdsMap[image.id]) return
-        imageIdsMap[image.id] = image
+        if(_imageIdsMap[image.id]) return
+        _imageIdsMap[image.id] = image
         _images.push(image)
+
+        _imagesContainer.prepend(_templatePhoto(image))
     }
 
-    try {
-        config.images.forEach(addImage)
-    } catch(err) {
-    }
+    try { config.images.forEach(_addImage) } catch(err) {}
 
     var alreadyAttachedImageUploader
-    this.openImageFileSelect = openImageFileSelect
-    function openImageFileSelect() {
+    var _openImageFileSelectButtonSelector = '.js-SmedianPageComponentPhotoGallery-openImageFileSelectButton'
+    var _imageUploadProgressSelector = '.js-SmedianPageComponentPhotoGallery-imageUploadProgress'
+    var _closeButtonSelector = '.js-SmedianPageComponentPhotoGallery-closeButton'
+    var _selectImageSelector = '.js-SmedianPageComponentPhotoGallery-selectImage'
+    var _imagesContainer = '.js-SmedianPageComponentPhotoGallery-imagesContainer'
+    var _imageUploadErrorLabelSelector = '.js-SmedianPageComponentPhotoGallery-imageUploadError'
+
+    const _templatePhoto = (image) => `<a class="smpscss_masonry-grid-item" data-image-id="${image.id}"><img ng-src="${image.url}"></a>`
+
+    this.attachActions = _attachActions
+    
+    function _attachActions() {
+        $(_openImageFileSelectButtonSelector).click(() => {
+            _openImageFileSelect()
+        })
+
+        $(_closeButtonSelector).click(() => {
+            _toggleShow()
+        })
+
+        $(_selectImageSelector).click(() => {
+            const imageId = $(this).data('image-id')
+            _onSelectImage(_imageIdsMap[imageId])
+        })
+    }
+
+    var _isUploading = false
+    function _toggleIsUploading(status, err) {
+        _isUploading = !!status
+        if (_isUploading) {
+            $(_imageUploadProgressSelector).show()
+            $(_imageUploadErrorLabelSelector).hide()
+        } else {
+            $(_imageUploadProgressSelector).hide()
+        }
+        if (err) {
+            $(_imageUploadErrorLabelSelector).text(`Failed to upload that image due to: ${err.message}`)
+            $(_imageUploadErrorLabelSelector).show()
+        }
+    }
+
+    this.openImageFileSelect = _openImageFileSelect
+    function _openImageFileSelect() {
         $('.js-SmedianPageComponentPhotoGallery-startImageUpload').click()
         if(alreadyAttachedImageUploader) return
         alreadyAttachedImageUploader = true
-        attachJQueryImageUploadBase64BySelector('.js-SmedianPageComponentPhotoGallery-startImageUpload', (data) => {
+        _attachJQueryImageUploadBase64BySelector('.js-SmedianPageComponentPhotoGallery-startImageUpload', (data) => {
             delete self.uploadError
-            self.isUploading = true
-            PageAdminService.uploadImage($scope.pageId, {
+            _toggleIsUploading(true)
+            _adminNetworkService.uploadImage($scope.pageId, {
                 base64Url: data.base64Url,
                 fileExtension: data.fileExtension
+            }, (scImage) => {
+                _addImage(scImage)
+                _toggleIsUploading()
+            }, (res) => {
+                var err
+                if(res.status == 413) {
+                    err = new Error('Image must be less than 1MB to upload.')
+                } else {
+                    err = new Error('Unknown error.')
+                }
+                _toggleIsUploading(false, err)
             })
-                .then((scImage) => {
-                    self.images.push(scImage)
-                    angularScopeUIUpdator(() => {
-                        self.isUploading = false
-                    })
-                }, (err) => {
-                    if(err.status == 413) {
-                        err = new Error('Image must be less than 1MB to upload.')
-                    } else {
-                        err = new Error('Unknown error.')
-                    }
-                    self.isUploading = false
-                    self.uploadError = err
-                })
         }, (err) => {
-            debugger
-            self.isUploading = false
-            self.uploadError = err
+            _toggleIsUploading(false, err)
         })
     }
 
-    this.toggleShow = config.toggleShow || function(show) {
-        angularScopeUIUpdator(() => {
-            self.show = show != undefined ? show : !self.show
-        })
+    this.toggleShow = function(show) {
+        _toggleShow(show)
     }
-    this.onSelectImage = onSelectImage
-    function onSelectImage(image) {
+
+    var _isShown = false
+    function _toggleShow(show) {
+        _isShown = show != undefined ? show : !_isShown
+        if(_isShown) {
+            _getEl().show()
+        } else {
+            _getEl().hide()
+        }
+    }
+
+    function _getEl() {
+        return $('js-SmedianPageComponentPhotoGallery')
+    }
+
+    this.onSelectImage = _onSelectImage
+    function _onSelectImage(image) {
         self.lastImage = image
         try {
             config.onSelectImage(image)
@@ -74,7 +118,7 @@ const SMedianPageComponentPhotoGallery = function(config) {
         self.show = false
     }
 
-    function getBase64(file, onSuccess, onError) {
+    function _getBase64(file, onSuccess, onError) {
         if(!onSuccess) onSuccess = () => {}
         if(!onError) onError = () => {}
         try {
@@ -90,7 +134,7 @@ const SMedianPageComponentPhotoGallery = function(config) {
         } catch(err) {}
      }
     
-    function attachJQueryImageUploadBase64BySelector(selector, onBase64, onFail) {
+    function _attachJQueryImageUploadBase64BySelector(selector, onBase64, onFail) {
         if(!selector) return
         $(selector).on('change', function(e) {
             try {
@@ -102,7 +146,7 @@ const SMedianPageComponentPhotoGallery = function(config) {
                 if(!supportedFileTypesMap[file.type]) {
                     return onFail(new Error('Not a supported image file: ' + file.type))
                 }
-                getBase64(file, (base64Url) => {
+                _getBase64(file, (base64Url) => {
                     if(getBase64SizeKb(base64Url) > 60144 /* 6MB*/) {
                         debugger
                         return onFail && onFail(new Error('Image must be smaller than 1MB'))
