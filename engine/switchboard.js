@@ -2,15 +2,18 @@
 
 const fs = require('fs');
 const Q = require('q');
+const promiseUtils = require('./utils/promises')
+const RedisManager = require('./cache/RedisManager')
 
 var _jsonCache = {}
 class SwitchBoard {
     constructor(name) {
         this.name = name;
+        this._redisManager = new RedisManager()
     }
 
     connectToRedis(redisUrl) {
-
+        return this._redisManager.connect(redisUrl)
     }
 
     fetchSync(fileId) {
@@ -31,6 +34,7 @@ class SwitchBoard {
             case 'util.objects': return require('./utils/promises')
             case 'util.functions': return require('./utils/promises')
             case 'util.dates': return require('./utils/promises')
+            case 'manager.redis': return require('./cache/RedisManager')
             
             default: throw new Error(`Unsupported fileId: ${fileId}`)
         }

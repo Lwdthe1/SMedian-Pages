@@ -2,16 +2,20 @@
 const Q = require('q')
 const redis = require('redis');
 
+const switchBoard = smedianPagesModuleShared.switchBoard
+const promiseUtils = switchBoard.require('util.promises')
+
 function RedisManager() {
 	var client
 	this.connect = function(url) {
-		Q.Promise((resolve, reject) => {
+		return promiseUtils.promise(() => {
             opts = opts || {no_ready_check: true}
 			client = redis.createClient(url, opts)
-			resolve()
+			return
 		})
 	}
 
+	this.isConnected = () => !!client
 	this.getClient = () => client;
 	
 	this.set = set

@@ -8,7 +8,7 @@
   <!--for SEO: tells search engines that we are using ajax calls and so it should crawl our webapp appropriately.-->
   <meta name="fragment" content="!">
   <title>{{_sm_.seo.title}}</title>
-  <base href="/pages/templates/pub/t1/page/">
+  <base href="/vendor_node/smedian-pages/templates/pub/t1/page/">
 
   <meta name="referrer" content="always">
   <meta property="description" content="{{_sm_.seo.description}}">
@@ -38,7 +38,7 @@
   <link href="css/u.css" rel="stylesheet" type="text/css">
 
   <!--SMEDIAN PAGE COMPONENTS -->
-  <link href="/pages/shared/css/main.css" rel="stylesheet" type="text/css">
+  <link href="/vendor_node/smedian-pages/shared/css/main.css" rel="stylesheet" type="text/css">
   
   <link href="{{_sm_.seo.faviconUrl}}" rel="shortcut icon" type="image/x-icon">
   <link href="{{_sm_.seo.faviconUrl}}" rel="apple-touch-icon">
@@ -55,13 +55,11 @@
   <script src="/js/main.js"></script>
   <script src="/js/mainUtils.js"></script>
   <script src="/js/classes/User.js"></script>
-  <script src="/pages/shared/js/main.js"></script>
+  <script src="/vendor_node/smedian-pages/shared/js/main.js"></script>
   <script src="/js/google-tracking.js"></script>
 </head>
 <body class="body">
   <div id="ng-controller-view" ng-view></div>
-  
-  <div ng-include src="'/pages/shared/views/menu/actions_menu.html'"></div>
   
   <span id="ssr-view-rmwr"></span>
   
@@ -86,7 +84,7 @@
   <script src="/js/libs/angular-socket-io/socket.js"></script>
 
   <!--SMEDIAN PAGE COMPONENTS -->
-  <script src="/pages/shared/js/components/ActionsMenu.js"></script>
+  <script src="/vendor_node/smedian-pages/shared/js/component/ActionsMenuComponent.js"></script>
 
   <!-- ================= END ANGULAR APP DEPENDENDCIES ================== -->
   <!-- ================= END ANGULAR APP DEPENDENDCIES ================== -->

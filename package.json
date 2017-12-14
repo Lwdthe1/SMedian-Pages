@@ -7,7 +7,9 @@
     "url": "git+https://github.com/Lwdthe1/SMedian-Pages.git"
   },
   "keywords": [
-    "smedian", "smedian pages", "smedian templates"
+    "smedian",
+    "smedian pages",
+    "smedian templates"
   ],
   "author": "Lincoln W Daniel <lwdthe1@gmail.com> (http://lincolnwdaniel.com)",
   "license": "MIT",
@@ -23,16 +25,17 @@
     "node": "6.11.3"
   },
   "dependencies": {
+    "deep-freeze-strict": "1.1.1",
+    "graphql": "^0.11.7",
     "jQuery": "^1.7.4",
     "jsdom": "9.12.0",
-    "ng-node-compile": "2.0.52",    
+    "ng-node-compile": "2.0.52",
     "q": "1.4.1",
     "redis": "^2.8.0",
     "request": "2.72.0",
     "sanitize-html": "^1.16.1",
     "striptags": "^3.1.0",
-    "underscore": "^1.8.3",
-    "deep-freeze-strict": "1.1.1"
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "eslint": "^4.8.0",

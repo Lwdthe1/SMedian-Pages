@@ -10,7 +10,7 @@
   <!--for SEO: tells search engines that we are using ajax calls and so it should crawl our webapp appropriately.-->
   <meta name="fragment" content="!">
   <title>Page Admin | Publication</title>
-  <base href="/pages/templates/pub/t1/admin/">
+  <base href="/vendor_node/smedian-pages/templates/pub/t1/admin/">
 
   <meta content="Page Admin" name="description">
   <meta content="Admin" property="og:title">
@@ -32,7 +32,7 @@
   <link href="/css/text.css" rel="stylesheet" type="text/css">
   <link href="/css/colors.css" rel="stylesheet" type="text/css">
 
-  <link href="/pages/shared/css/main.css" rel="stylesheet" type="text/css">
+  <link href="/vendor_node/smedian-pages/shared/css/main.css" rel="stylesheet" type="text/css">
 
   <!-- ============== START NPROGRESS CSS Resources ============== -->
   <link rel="stylesheet" href="/css/libs/nprogress/nprogress.css">
@@ -55,10 +55,9 @@
   <script src="/js/classes/User.js"></script>
   <script src="/js/google-tracking.js"></script>
 
-  <script src="/pages/shared/js/main.js"></script>
+  <script src="/vendor_node/smedian-pages/shared/js/main.js"></script>
 </head>
 <body>
-  <div ng-include src="'/pages/shared/views/component/photo_gallery.html'"></div>
   <div class="navbar" style="z-index:900">
     <div class="container-2 w-container">
       <div class="div-block-3">
@@ -131,7 +130,7 @@
           Customize your page below. Make sure to click <b>Save</b> above along the way. Once saved, you can preview your page by clicking <b>Preview</b> above. Once you're happy with your page, save it and the <b>Publish</b> button will show up above. Click <b>Publish</b> to publish your webpage publically.
         </p>
         <p class="clean-text" style="text-align:left">
-          To use this page as your landing page so that people visiting you at <a class="link" href="http://smedian.com/{{pub.urlSlug}}" target="_blank">Smedian.com/{{pub.urlSlug}}</a> will be sent there, go to you pages dashboard at <a class="link" href="http://smedian.com/pages/pub/{{pub.id}}" target="_blank">Smedian.com/pages/pub/{{pub.id}}</a> and click <b>Use as Landing Page</b>.
+          To use this page as your landing page so that people visiting you at <a class="link" href="http://smedian.com/{{pub.urlSlug}}" target="_blank">Smedian.com/{{pub.urlSlug}}</a> will be sent there, go to you pages dashboard at <a class="link" href="http://smedian.com/vendor_node/smedian-pages/pub/{{pub.id}}" target="_blank">Smedian.com/vendor_node/smedian-pages/pub/{{pub.id}}</a> and click <b>Use as Landing Page</b>.
         </p>
         <p class="clean-text" style="text-align:left">
           While customizing your page below, you will see some fields that ask you to enter an "image url".
@@ -156,7 +155,7 @@
             <label class="input-field-label" >Page Keywords <span class="form-label-meta">(comma separated)</span></label>
             <input ng-model="page.draftData.seo.keywords" ng-change="onDraftDataChange()" class="form-field w-input"  type="text">
             <label class="input-field-label" >Page Image Url
-              <button ng-click="openImageGallery('page.draftData.seo.imageUrl')"><img src="/img/icon_gallery.svg" class="smpscss_u-size16x16 smpscss_u-marginRight10"/></button>
+              <button ng-click="openImageGallery('page.draftData.seo.imageUrl')"><img src="/img/icon_gallery.svg" class="smpscss-u-size16x16 smpscss-u-marginRight10"/></button>
             </label>
             <input ng-model="page.draftData.seo.imageUrl" ng-change="onDraftDataChange()" class="form-field w-input" id="user-logo-url" maxlength="256" name="user-logo-url" placeholder="https://yourwebsite.com/images/logo.png"  type="text">
           </form>
@@ -170,7 +169,7 @@
             <input ng-model="page.draftData.about.name" ng-change="onDraftDataChange()" class="form-field w-input" id="pub-name-2" maxlength="256" name="pub-name-2" placeholder="Name"  type="text">
             <textarea ng-model="page.draftData.about.description" ng-change="onDraftDataChange()" class="form-field w-input" id="field-2" maxlength="5000" name="field-2" placeholder="Description" ></textarea>
             <label class="input-field-label" >Logo URL
-              <button ng-click="openImageGallery('page.draftData.about.logoUrl')"><img src="/img/icon_gallery.svg" class="smpscss_u-size16x16 smpscss_u-marginRight10"/></button>
+              <button ng-click="openImageGallery('page.draftData.about.logoUrl')"><img src="/img/icon_gallery.svg" class="smpscss-u-size16x16 smpscss-u-marginRight10"/></button>
             </label>
             <input ng-model="page.draftData.about.logoUrl" ng-change="onDraftDataChange()" class="form-field w-input" id="pub-logo-url" maxlength="256" name="pub-logo-url" placeholder="https://yourwebsite.com/images/logo.png"  type="text">
           </form>
@@ -186,7 +185,7 @@
             <input ng-model="page.draftData.heroSection.subtitle" ng-change="onDraftDataChange()" class="form-field w-input"  id="pub-hero-subtitle" maxlength="256" name="pub-hero-subtitle" placeholder="Publication Slogan"  type="text">
             <label class="input-field-label">Background Image
               <button ng-click="openImageGallery('page.draftData.heroSection.backgroundImageUrl')">
-                <img src="/img/icon_gallery.svg" class="smpscss_u-size16x16 smpscss_u-marginRight10"/>
+                <img src="/img/icon_gallery.svg" class="smpscss-u-size16x16 smpscss-u-marginRight10"/>
               </button>
             </label>
             <input ng-model="page.draftData.heroSection.backgroundImageUrl" ng-change="onDraftDataChange()" class="form-field w-input"id="pub-hero-background-image-2" maxlength="256" name="pub-hero-background-image-2" placeholder="https://yourwebsite.com/images/background.png"  type="text">
@@ -252,7 +251,7 @@
             <label class="input-field-label" >Success Text</label>
             <input ng-model="page.draftData.newsletterForm.successText" ng-change="onDraftDataChange()" class="form-field w-input" id="pub-theme-color-4" maxlength="256" name="pub-theme-color-4" placeholder="We'll be in touch soon!"  type="text">
             <label class="input-field-label" >Success Image Url
-              <button ng-click="openImageGallery('page.draftData.newsletterForm.successImageUrl')"><img src="/img/icon_gallery.svg" class="smpscss_u-size16x16 smpscss_u-marginRight10"/></button>
+              <button ng-click="openImageGallery('page.draftData.newsletterForm.successImageUrl')"><img src="/img/icon_gallery.svg" class="smpscss-u-size16x16 smpscss-u-marginRight10"/></button>
             </label>
             <input ng-model="page.draftData.newsletterForm.successImageUrl" ng-change="onDraftDataChange()" class="form-field w-input" id="pub-theme-color-4" maxlength="256" name="pub-theme-color-4" placeholder="http://example.com/images/example.png"  type="text">
             <label class="input-field-label" >Success Link Url</label>
@@ -281,7 +280,7 @@
             <label class="input-field-label" >Success Text</label>
             <input ng-model="page.draftData.contactForm.successText" ng-change="onDraftDataChange()" class="form-field w-input" id="pub-theme-color-4" maxlength="256" name="pub-theme-color-4" placeholder="We'll be in touch soon!"  type="text">
             <label class="input-field-label" >Success Image Url
-              <button ng-click="openImageGallery('page.draftData.contactForm.successImageUrl')"><img src="/img/icon_gallery.svg" class="smpscss_u-size16x16 smpscss_u-marginRight10"/></button>
+              <button ng-click="openImageGallery('page.draftData.contactForm.successImageUrl')"><img src="/img/icon_gallery.svg" class="smpscss-u-size16x16 smpscss-u-marginRight10"/></button>
             </label>
             <input ng-model="page.draftData.contactForm.successImageUrl" ng-change="onDraftDataChange()" class="form-field w-input" id="pub-theme-color-4" maxlength="256" name="pub-theme-color-4" placeholder="http://example.com/images/example.png"  type="text">
             <label class="input-field-label" >Success Link Url</label>
@@ -377,7 +376,7 @@
                 <input ng-model="featuredStory.description" ng-change="onDraftDataChange()" class="form-field w-input" id="pub-featured-story-url-12" maxlength="256" name="pub-featured-story-url-12" placeholder="Description"  type="text">
                 <input ng-model="featuredStory.imageUrl" ng-change="onDraftDataChange()" class="form-field w-input" id="pub-featured-story-url-12" maxlength="256" name="pub-featured-story-url-12" placeholder="http://example.com/images/example.png"  type="text">
                 <img ng-src="featuredStory.imageUrl" ng-show="featuredStory.imageUrl.length">
-                <button class="clean-button clean-button--plain" ng-click="openImageGallery('story', featuredStory)"><img src="/img/icon_gallery.svg" class="smpscss_u-size16x16 smpscss_u-marginRight10"/></button>
+                <button class="clean-button clean-button--plain" ng-click="openImageGallery('story', featuredStory)"><img src="/img/icon_gallery.svg" class="smpscss-u-size16x16 smpscss-u-marginRight10"/></button>
                 <i class="clean-text text-s ct-l-green" style="margin-top:5px; margin-bottom:10px" ng-show="fetchingFeatureStoryUrls[featuredStory.url.trim()]">
                   Loading title, description, and image url ...
                 </i>
@@ -432,7 +431,7 @@
   <script src="/js/libs/angular-socket-io/socket.js"></script>
 
   <!--SMEDIAN PAGE COMPONENTS -->
-  <script src="/pages/shared/js/components/PhotoGallery.js"></script>
+  <script src="/vendor_node/smedian-pages/shared/js/component/PhotoGalleryComponent.js"></script>
 
   <!-- ================= END ANGULAR APP DEPENDENDCIES ================== -->
   <!-- ================= END ANGULAR APP DEPENDENDCIES ================== -->
@@ -446,7 +445,7 @@
   <!--APP FILTERS-->
   <script src="js/app/filters.js"></script>
   <!--APP SERVICES-->
-  <script src="/pages/shared/js/app/services/pageAdminService.js"></script>
+  <script src="/vendor_node/smedian-pages/shared/js/app/services/pageAdminService.js"></script>
   <script src="js/app/services/socketIOService.js"></script>
   <!--APP CONTROLLERS-->
   <script src="js/app/controllers/adminController.js"></script>

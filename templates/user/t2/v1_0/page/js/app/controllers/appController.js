@@ -20,13 +20,9 @@ angularApp
     $scope.templateData = ssrCDataPage.templateData
     $scope.ij = ssrCDataPage.ij
 
-    $scope.smedianPageComponent_actionsMenu = new SMedianPageComponentActionsMenu({
-        angularScope: $scope,
-        angularScopeUIUpdator: (updateCallback) => {
-            $timeout(() => {
-                updateCallback()
-            })
-        },
+    $scope.smedianPageComponentActionsMenu = new SmedianPages.component.ActionsMenu({
+        page: ssrCData.page,
+        getCurrentUser: () => CurrentUser.get(),
     })
     
     $scope.user = $scope.page.masterObject

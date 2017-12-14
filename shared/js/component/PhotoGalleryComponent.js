@@ -29,11 +29,17 @@ SmedianPages.component.PhotoGallery = function(config) {
     var _imagesContainer = '.js-SmedianPageComponentPhotoGallery-imagesContainer'
     var _imageUploadErrorLabelSelector = '.js-SmedianPageComponentPhotoGallery-imageUploadError'
 
-    const _templatePhoto = (image) => `<a class="smpscss_masonry-grid-item" data-image-id="${image.id}"><img ng-src="${image.url}"></a>`
+    const _templatePhoto = (image) => `<a class="smpscss-masonry-grid-item" data-image-id="${image.id}"><img ng-src="${image.url}"></a>`
 
     this.attachActions = _attachActions
     
     function _attachActions() {
+        // remove existing hooks
+        $(_openImageFileSelectButtonSelector).unbind()
+        $(_closeButtonSelector).unbind()
+        $(_selectImageSelector).unbind()
+
+        // attach hooks
         $(_openImageFileSelectButtonSelector).click(() => {
             _openImageFileSelect()
         })
@@ -106,7 +112,7 @@ SmedianPages.component.PhotoGallery = function(config) {
     }
 
     function _getEl() {
-        return $('js-SmedianPageComponentPhotoGallery')
+        return $('.js-SmedianPageComponentPhotoGallery')
     }
 
     this.onSelectImage = _onSelectImage
@@ -227,7 +233,24 @@ SmedianPages.component.PhotoGallery = function(config) {
         return 2*Math.ceil(base64Url.length/3) /1000
     }
 
+    function _fetchAndAttachHtml() {
+        if (_getEl().length) {
+            _attachActions()
+            return
+        }
+        
+        var iframe = document.createElement('iframe');
+        iframe.style.display = "none";
+        iframe.src = '/vendor_node/smedian-pages/shared/views/component/photoGalleryComponent.html'
+        iframe.onload = (html) => {
+            debugger
+            $('body').append(html)
+            _attachActions()
+        }
+        document.body.appendChild(iframe);
+    }
+
     if (!config.awaitAttachActionsMesage) {
-        _attachActions()
+        _fetchAndAttachHtml()
     }
 }

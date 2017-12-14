@@ -1,5 +1,5 @@
 
-.smpscss_clean-button {
+.smpscss-clean-button {
     display: inline-block;
     height: 32px;
     padding: 0 16px !important;
@@ -37,13 +37,13 @@
     transition: all 0.2s cubic-bezier(0.42, 0, 0.58, 1);
 }
 
-.smpscss_clean-button--small {
+.smpscss-clean-button--small {
     height: auto;
     margin: 0 5px 0 5px;
     line-height: 20px;
 }
 
-.smpscss_clean-button--plain {
+.smpscss-clean-button--plain {
     color:initial;
     margin:0px;
     padding: 0px !important;

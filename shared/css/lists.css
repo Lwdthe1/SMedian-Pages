@@ -1,11 +1,11 @@
-.smpscss_cards {
+.smpscss-cards {
     list-style: none;
     list-style-image: none;
     padding-left: 0px;
     padding-right: 10px;
 }
 
-.smpscss_card {
+.smpscss-card {
     position: relative;
     width: 100%;
     display: inline-block;
@@ -20,17 +20,17 @@
 }
 
 
-.smpscss_cards--bordered>.smpscss_card {
+.smpscss-cards--bordered>.smpscss-card {
     border-bottom: 1px solid rgba(0,0,0,.05);
 }
 
-.smpscss_card-description {
+.smpscss-card-description {
     font-size: 13px;
     line-height: 1.3;
     margin-bottom: 4px;
 }
 
-.smpscss_card-content {
+.smpscss-card-content {
     display: table-cell;
     vertical-align: middle;
     padding-left: 20px;
@@ -40,7 +40,7 @@
     word-wrap: break-word;
 }
 
-.smpscss_card-name {
+.smpscss-card-name {
     font-size: 18px;
     color: rgba(0,0,0,.8);
     line-height: 1.1;
@@ -48,46 +48,46 @@
     margin-top:0px
 }
 
-.smpscss_card .buttonSet {
+.smpscss-card .buttonSet {
     margin-top: 10px;
 }
 
-.smpscss_masonry-grid--421 { /* Masonry container */
+.smpscss-masonry-grid--421 { /* Masonry container */
     column-count: 4;
     column-gap: 1em;
 }
 
-.smpscss_masonry-grid--321 { /* Masonry container */
+.smpscss-masonry-grid--321 { /* Masonry container */
     column-count: 3;
     column-gap: 1em;
 }
 
-.smpscss_masonry-grid-item { /* Masonry bricks or child elements */
+.smpscss-masonry-grid-item { /* Masonry bricks or child elements */
     display: inline-block;
     margin: 0 0 1em;
     width: 100%;
 }
 
 @media only screen and (max-width: 768px) {
-    .smpscss_card-content {
+    .smpscss-card-content {
         padding-right: 15px;
     }
-    .smpscss_masonry-grid--321 {
+    .smpscss-masonry-grid--321 {
         column-count: 2;
     }
-    .smpscss_masonry-grid--421 {
+    .smpscss-masonry-grid--421 {
         column-count: 2;
     }
 }
 
 @media only screen and (max-width: 480px) {
-    .smpscss_card-content {
+    .smpscss-card-content {
         padding-right: 15px;
     } 
-    .smpscss_masonry-grid--321 {
+    .smpscss-masonry-grid--321 {
         column-count: 1;
     }
-    .smpscss_masonry-grid--421 {
+    .smpscss-masonry-grid--421 {
         column-count: 1;
     }
 }

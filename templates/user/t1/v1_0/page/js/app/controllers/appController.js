@@ -23,13 +23,9 @@ angularApp
         $scope.user = $scope.page.masterObject
         $scope.currentUser = CurrentUser.get();
 
-        $scope.smedianPageComponent_actionsMenu = new SMedianPageComponentActionsMenu({
-            angularScope: $scope,
-            angularScopeUIUpdator: (updateCallback) => {
-                $timeout(() => {
-                    updateCallback()
-                })
-            },
+        $scope.smedianPageComponentActionsMenu = new SmedianPages.component.ActionsMenu({
+            page: ssrCData.page,
+            getCurrentUser: () => CurrentUser.get(),
         })
 
         $scope.$on('socket:user_send_access_token', () => {

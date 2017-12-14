@@ -1,5 +1,5 @@
 
-.smpscss_actions-menu {
+.smpscss-actions-menu {
     color: rgba(0,0,0,.7);
     background: #fff;
     box-shadow: 0 1px 4px rgba(0,0,0,.04);
@@ -28,8 +28,8 @@
     z-index: 9000000000 !important;
 }
 
-.smpscss_actions-badge,
-.smpscss_actions-badge * {
+.smpscss-actions-badge,
+.smpscss-actions-badge * {
   cursor: pointer;
   outline: none;
   position: static;
@@ -92,7 +92,7 @@
   word-spacing: normal;
   word-wrap: normal;
 }
-.smpscss_actions-badge {
+.smpscss-actions-badge {
   position: fixed !important;
   display: inline-block !important;
   visibility: visible !important;
@@ -118,7 +118,7 @@
   white-space: nowrap;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.1);
 }
-.smpscss_actions-badge > img {
+.smpscss-actions-badge > img {
   display: inline-block !important;
   visibility: visible !important;
   opacity: 1 !important;

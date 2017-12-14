@@ -1,0 +1,26 @@
+<div class="smpscss-component-photo-gallery js-SmedianPageComponentPhotoGallery" style="display:none">
+    <a class="smpscss-clean-button smpscss-clean-button--plain js-SmedianPageComponentPhotoGallery-closeButton" 
+    style="position: absolute; top: 10px; right:10px; font-size: 24px" title="Close Photo Gallery">
+        <b>×</b>
+    </a>
+    <ul class="smpscss-cards">
+        <li class="smpscss-card">
+            <h3 class="smpscss-heading--bold" target="_blank">
+                <img src="/img/logo.png" style="width: 24px; height:24px; display:inline"> Photo Gallery
+            </h3>
+            <p>
+                <button class="smpscss-clean-button smpscss-clean-button--plain smpscss-u-colorGreen js-SmedianPageComponentPhotoGallery-openImageFileSelectButton" >
+                    <strong>Upload New Image</strong>
+                </button>
+                <button class="smpscss-clean-button smpscss-clean-button--plain smpscss-u-colorBlackLight js-SmedianPageComponentPhotoGallery-imageUploadProgress">
+                    Uploading image. Please wait ...
+                </button>
+                <p class="smpscss-clean-text smpscss-u-colorRed js-SmedianPageComponentPhotoGallery-imageUploadError"></p>
+                <input class="js-SmedianPageComponentPhotoGallery-startImageUpload" style="display:none" type="file">
+            </p>
+        </li>
+        <li class="smpscss-card">
+            <div class="smpscss-masonry-grid--421 js-SmedianPageComponentPhotoGallery-imagesContainer"></div>
+        </li>
+    </ul>
+</div>

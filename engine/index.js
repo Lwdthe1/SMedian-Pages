@@ -5,6 +5,9 @@ const Q = _require('q')
 const switchBoard = _require('./switchboard')
 const deepFreeze = _require('deep-freeze-strict')
 
+global.smedianPagesModuleShared = {
+    switchBoard: switchBoard
+}
 /**
  * The engine for interacting with Smedian pages.
  * The engine is configurable but is a singleton
