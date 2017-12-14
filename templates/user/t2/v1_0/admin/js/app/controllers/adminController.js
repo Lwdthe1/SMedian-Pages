@@ -249,7 +249,7 @@ angularApp
         ensureField(draftData, 'heroSection', {})
         ensureField(draftData.heroSection, 'title', user.name || user.username)
         ensureField(draftData.heroSection, 'subtitle', user.bio)
-        ensureField(draftData.heroSection, 'leftImageUrl', '/vendor_node/smedian-pages/templates/user/t2/page/images/pic01.jpg')
+        ensureField(draftData.heroSection, 'leftImageUrl', '/vendor_node/smedian-pages/templates/user/t2/v1_0/page/images/pic01.jpg')
         ensureField(draftData.heroSection, 'rightBackgroundColor', 'ffffff')
         ensureField(draftData.heroSection, 'titleTextColor', '555555')
         ensureField(draftData.heroSection, 'subtitleTextColor', '555555')

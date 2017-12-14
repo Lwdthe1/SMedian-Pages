@@ -270,7 +270,7 @@ angularApp
         ensureField(draftData.heroSection, 'subtitle', user.bio)
         ensureField(draftData.heroSection, 'profileImageUrl', user.imageUrl)
         ensureBoolField(draftData.heroSection, 'showProfileImage',  false)
-        ensureField(draftData.heroSection, 'backgroundImageUrl', '/vendor_node/smedian-pages/templates/user/t1/page/images/mountain.jpg')
+        ensureField(draftData.heroSection, 'backgroundImageUrl', '/vendor_node/smedian-pages/templates/user/t1/v1_0/page/images/mountain.jpg')
         ensureField(draftData.heroSection, 'backgroundColor', '1abc9c')
         ensureField(draftData.heroSection, 'textColor', 'ffffff')
         //featured stories button
