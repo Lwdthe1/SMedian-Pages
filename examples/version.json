@@ -20,6 +20,10 @@
         "id": "angular",
         "version": "2.x.x"
     },
+    "hooks": {
+        "beforeSave": "/path/to/hooks/beforeSaveHook.js",
+        "serverSideRender": "/path/to/hooks/serverSideRenderHook.js"
+    },
     "tests": [
         {
             "key": "beforeSave",

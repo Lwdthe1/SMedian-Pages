@@ -9,7 +9,7 @@ const errors = switchBoard.require('util.errors')
  * Use this function to process the data that is to be used to render the page from the template.
  * This must return a promise that resolves with an HTML string or fails with an error
  * @param {TemplateVersion} templateVersion
- * @param {RenderPageOpts} opts 
+ * @param {RenderPageOpts} pageOpts 
  * @required
  */
 function renderPage(pageOpts) {
