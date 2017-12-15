@@ -1,17 +1,21 @@
 {
     "version": "0.0.1",
     "templates": {
-        "user": [
-            {
-                "id": "uniqueTemplateId",
-                "templateAbsolutePath": "/path/to/user/template.json"
+        "user": {
+            "user_t1": {
+                "templateAbsolutePath": "/templates/user/t1/template.json"
+            },
+            "user_t2": {
+                "templateAbsolutePath": "/templates/user/t2/template.json"
             }
-        ],
-        "pub": [
-            {
-                "id": "uniqueTemplateId",
-                "templateAbsolutePath": "/path/to/pub/template.json"
+        },
+        "pub": {
+            "pub_t1": {
+                "templateAbsolutePath": "/templates/pub/t1/template.json"
+            },
+            "pub_t2": {
+                "templateAbsolutePath": "/templates/pub/t2/template.json"
             }
-        ]
+        }
     }
 }

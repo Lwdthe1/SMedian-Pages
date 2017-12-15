@@ -6,8 +6,9 @@
         "description": "long text",
         "imageAbsolutePath": "/thumb_image.png"
     },
-    "editorIndexAbsolutePath": "/admin/admin-index.hbs",
-    "demoIndexAbsolutePath": "/preview/preview-index.hbs",
+    "indexAbsolutePath": "/templates/pub/t2/v1_0/page/index.hbs",
+    "editorIndexAbsolutePath": "/templates/pub/t2/v1_0/admin/admin-index.hbs",
+    "demoIndexAbsolutePath": "/templates/pub/t2/v1_0/preview/preview-index.hbs",
     "keywords": [
         "writer"
     ],
@@ -18,10 +19,6 @@
     "language": {
         "id": "angular",
         "version": ""
-    },
-    "hooks": {
-        "beforeSaveScript": "/path/to/script.js",
-        "serverSideRenderScript": "/path/to/script.js"
     },
     "tests": [
         {

@@ -35,5 +35,8 @@ class Engine {
     }
 }
 
-const engine = new Engine()
-module.exports = engine
+module.exports = {
+    engine: new Engine(),
+    EngineConfig: switchBoard.require('config.Engine'),
+    RenderPageOpts: switchBoard.require('config.RenderPageOpts'),
+}

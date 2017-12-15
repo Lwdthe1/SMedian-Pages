@@ -6,13 +6,8 @@
         "name": "Lincoln W Daniel",
         "url": "http://lincolnwdaniel.com"
     },
-    "versions": [
-        {
-            "1.0": {
-                "released": true,
-                "versionAbsolutePath": "/path/to/version.json"
-            }
-        }
-    ]
+    "versions": {
+        "1.0": "/path/to/version.json"
+    }
 }
   

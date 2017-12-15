@@ -1,4 +1,5 @@
 {
+    "isReleased": true,
     "title": "Title",
     "description": "long text",
     "card": {
@@ -18,10 +19,6 @@
     "language": {
         "id": "angular",
         "version": "2.x.x"
-    },
-    "hooks": {
-        "beforeSaveScript": "/path/to/script.js",
-        "serverSideRenderScript": "/path/to/script.js"
     },
     "tests": [
         {
