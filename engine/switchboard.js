@@ -27,6 +27,7 @@ class SwitchBoard {
     require(fileId) {
         switch (fileId) {
             case 'manager.templates': require('./manager/templatesManager')
+            case 'manager.NgCompile': require('./manager/ngCompileManager')
             case 'class.Template': require('./classes/Template')
             case 'class.TemplateVersion': require('./classes/TemplateVersion')
             case 'class.TemplateFeedCard': require('./classes/TemplateFeedCard')
