@@ -1,7 +1,7 @@
 "use strict";
 
 const globals = require('../globals')
-const switchBoard = globals.switchBoard
+const switchBoard = require('../switchboard')
 const TemplateVersion = switchBoard.require('class.TemplateVersion')
 const TemplateFeedCard = switchBoard.require('class.TemplateFeedCard')
 

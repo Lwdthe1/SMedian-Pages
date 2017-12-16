@@ -6,7 +6,6 @@ const globals = require('./globals')
 const switchBoard = require('./switchboard')
 const deepFreeze = require('deep-freeze-strict')
 
-globals.switchBoard = switchBoard
 /**
  * The engine for interacting with Smedian pages.
  * The engine is configurable but is a singleton

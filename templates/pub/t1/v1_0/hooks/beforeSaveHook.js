@@ -2,7 +2,7 @@
 
 const Q = require('q');
 const globals = require('../../../../../engine/globals')
-const switchBoard = globals.switchBoard
+const switchBoard = require('../../../../../engine/switchBoard')
 const promiseUtils = switchBoard.require('util.promises')
 const errors = switchBoard.require('util.errors')
 

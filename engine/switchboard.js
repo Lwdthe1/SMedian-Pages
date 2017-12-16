@@ -12,7 +12,6 @@ const Template = require('./classes/Template')
 
 class SwitchBoard {
     constructor(name) {
-        globals.switchBoard = this
         this.name = name;
         this._redisManager = new RedisManager()
         this._fileCache = {}

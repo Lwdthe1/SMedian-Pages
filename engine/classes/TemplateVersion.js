@@ -1,7 +1,7 @@
 "use strict";
 
 const globals = require('../globals')
-const switchBoard = globals.switchBoard
+const switchBoard = require('../switchBoard')
 const promiseUtils = switchBoard.require('util.promises')
 const errors = switchBoard.require('util.errors')
 
