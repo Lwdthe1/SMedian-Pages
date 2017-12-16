@@ -21,7 +21,7 @@ class TemplateManager {
     getFeedCards(cache) {
         const results = {
             users: this.getUserTemplates(!cache),
-            pubs: this.getPubTemplates(!cache).map((template) => )
+            pubs:  this.getPubTemplates(!cache),
         }
         return feedCards
     }
