@@ -1,6 +1,7 @@
-use strict;
+"use strict";
 
-const switchBoard = smedianPagesModuleShared.switchBoard
+const globals = require('../globals')
+const switchBoard = globals.switchBoard
 const TemplateVersion = switchBoard.require('class.TemplateVersion')
 const TemplateFeedCard = switchBoard.require('class.TemplateFeedCard')
 

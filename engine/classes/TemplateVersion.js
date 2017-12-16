@@ -1,6 +1,7 @@
 "use strict";
 
-const switchBoard = smedianPagesModuleShared.switchBoard
+const globals = require('../globals')
+const switchBoard = globals.switchBoard
 const promiseUtils = switchBoard.require('util.promises')
 const errors = switchBoard.require('util.errors')
 

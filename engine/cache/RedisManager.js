@@ -2,7 +2,8 @@
 const Q = require('q')
 const redis = require('redis');
 
-const switchBoard = smedianPagesModuleShared.switchBoard
+const globals = require('../globals')
+const switchBoard = globals.switchBoard
 const promiseUtils = switchBoard.require('util.promises')
 
 function RedisManager() {

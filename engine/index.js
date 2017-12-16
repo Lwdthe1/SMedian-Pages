@@ -1,23 +1,17 @@
 "use strict";
 
-const Q = _require('q')
+const Q = require('q')
 
-const switchBoard = _require('./switchboard')
-const deepFreeze = _require('deep-freeze-strict')
+const globals = require('./globals')
+const switchBoard = require('./switchboard')
+const deepFreeze = require('deep-freeze-strict')
 
-global.smedianPagesModuleShared = {
-    switchBoard: switchBoard,
-    constants: {
-        entityType: {user: 'user', pub: 'pub'}
-    },
-}
+globals.switchBoard = switchBoard
 /**
  * The engine for interacting with Smedian pages.
  * The engine is configurable but is a singleton
  */
 class Engine {
-    _config: Object
-    
     /**
      * 
      * @param {EngineConfig} config 

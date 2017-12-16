@@ -1,14 +1,12 @@
 "use strict";
 
-const switchBoard = smedianPagesModuleShared.switchBoard
-const sharedConstants = smedianPagesModuleShared.constants
+const globals = require('../globals')
+const switchBoard = globals.switchBoard
+const sharedConstants = globals.constants
 const Template = switchBoard.require('class.Template')
 const TemplateFeedCard = switchBoard.require('class.TemplateFeedCard')
 
 class TemplateManager {
-    _templateCache: Object;
-    _package: Object;
-
     constructor() {
         this._templateCache = {}
     }
