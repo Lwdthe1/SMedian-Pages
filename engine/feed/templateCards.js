@@ -1,3 +1,3 @@
-const switchBoard = _require('../switchboard')
+const switchboard = _require('../switchboard')
 
 module.exports = new TemplateCards()

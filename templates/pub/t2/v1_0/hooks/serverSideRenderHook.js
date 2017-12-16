@@ -2,9 +2,9 @@
 
 const Q = require('q');
 const globals = require('../../../../../engine/globals')
-const switchBoard = require('../../../../../engine/switchBoard')
-const promiseUtils = switchBoard.require('util.promises')
-const errors = switchBoard.require('util.errors')
+const switchboard = require('../../../../../engine/switchboard')
+const promiseUtils = switchboard.require('util.promises')
+const errors = switchboard.require('util.errors')
 
 /**
  * Use this function to process the data that is to be used to render the page from the template.

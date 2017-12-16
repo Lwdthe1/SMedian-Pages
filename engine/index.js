@@ -3,7 +3,7 @@
 const Q = require('q')
 
 const globals = require('./globals')
-const switchBoard = require('./switchboard')
+const switchboard = require('./switchboard')
 const deepFreeze = require('deep-freeze-strict')
 
 /**
@@ -16,24 +16,24 @@ class Engine {
      * @param {EngineConfig} config 
      */
     start(config) {
-        if (!config instanceof switchBoard.require('config.Engine')) throw new Error('Invalid config param. config must be instance of EngineConfig')
+        if (!config instanceof switchboard.require('config.Engine')) throw new Error('Invalid config param. config must be instance of EngineConfig')
         // ensure none of the config values can be altered
         this._config = deepFreeze(_config)
         
-        const switchBoardPromise = switchBoard.connectRedis(_config.redisUrl)
+        const switchboardPromise = switchboard.connectRedis(_config.redisUrl)
         return Q.all([
-            switchBoardPromise
+            switchboardPromise
         ])
     }
 
     getFeedCards() {
-        switchBoard.getTemplateManager().getFeedCards()
+        switchboard.getTemplateManager().getFeedCards()
     }
 }
 
 module.exports = {
     engine: new Engine(),
-    EngineConfig: switchBoard.require('config.Engine'),
-    RenderPageOpts: switchBoard.require('config.RenderPageOpts'),
-    templateManager: switchBoard.getTemplateManager(),
+    EngineConfig: switchboard.require('config.Engine'),
+    RenderPageOpts: switchboard.require('config.RenderPageOpts'),
+    templateManager: switchboard.getTemplateManager(),
 }

@@ -11,18 +11,25 @@ const TemplatesManager = require('./manager/templatesManager')
 const Template = require('./classes/Template')
 
 class SwitchBoard {
-    constructor(name) {
-        this.name = name;
-        this._redisManager = new RedisManager()
+    constructor() {
         this._fileCache = {}
-        this._templatesManager = new TemplatesManager()
     }
 
     connectToRedis(redisUrl) {
         return this._redisManager.connect(redisUrl)
     }
 
-    getTemplateManager() {
+    get _redisManager() {
+        if (!this._redisManager) {
+            this._redisManager = new RedisManager()
+        }
+        return this._redisManager
+    }
+
+    get templateManager() {
+        if (!this._templatesManager) {
+            this._templatesManager = new TemplatesManager()
+        }
         return this._templatesManager
     }
 
@@ -75,5 +82,4 @@ class SwitchBoard {
     }
 }
 
-const switchBoard = new SwitchBoard()
-module.exports = switchBoard
+module.exports = new SwitchBoard()

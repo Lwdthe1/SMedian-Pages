@@ -1,10 +1,10 @@
 "use strict";
 
 const globals = require('../globals')
-const switchBoard = require('../switchBoard')
+const switchboard = require('../switchboard')
 const sharedConstants = globals.constants
-const Template = switchBoard.require('class.Template')
-const TemplateFeedCard = switchBoard.require('class.TemplateFeedCard')
+const Template = require('../classes/Template')
+const TemplateFeedCard = require('../classes/TemplateFeedCard')
 
 class TemplateManager {
     constructor() {
@@ -13,7 +13,7 @@ class TemplateManager {
 
     getPackage() {
         if (!this._package) {
-            this._package = JSON.parse(switchBoard.fetchFileSyncById('package.templates'))
+            this._package = JSON.parse(switchboard.fetchFileSyncById('package.templates'))
         }
         return this._package
     }

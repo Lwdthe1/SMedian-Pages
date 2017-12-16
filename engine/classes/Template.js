@@ -1,15 +1,15 @@
 "use strict";
 
 const globals = require('../globals')
-const switchBoard = require('../switchboard')
-const TemplateVersion = switchBoard.require('class.TemplateVersion')
-const TemplateFeedCard = switchBoard.require('class.TemplateFeedCard')
+const switchboard = require('../switchboard')
+const TemplateVersion = switchboard.require('class.TemplateVersion')
+const TemplateFeedCard = switchboard.require('class.TemplateFeedCard')
 
 class Template {
     constructor(entityType, id) {
         this._id = id
         this._entityType = entityType
-        this._data = JSON.parse(switchBoard.fetchFileSyncFromRoot(`/templates/${entityType}/${id}/template.json`))
+        this._data = JSON.parse(switchboard.fetchFileSyncFromRoot(`/templates/${entityType}/${id}/template.json`))
         this._versionsMap = {}
     }
 
