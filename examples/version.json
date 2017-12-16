@@ -5,7 +5,7 @@
     "card": {
         "title": "Title",
         "description": "very short description",
-        "imageAbsolutePath": "/thumb_image.png"
+        "imageAbsolutePath": "/path/to/thumb_image.png"
     },
     "editorIndexAbsolutePath": "/admin/admin-index.hbs",
     "demoIndexAbsolutePath": "/preview/preview-index.hbs",

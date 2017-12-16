@@ -1,7 +1,7 @@
 "use strict";
 
 const globals = require('../globals')
-const switchboard = require('../switchboard')
+const switchboard = require('../../switchboard')
 const sharedConstants = globals.constants
 const Template = require('../classes/Template')
 const TemplateFeedCard = require('../classes/TemplateFeedCard')
@@ -11,7 +11,7 @@ class TemplateManager {
         this._templateCache = {}
     }
 
-    getPackage() {
+    get package() {
         if (!this._package) {
             this._package = JSON.parse(switchboard.fetchFileSyncById('package.templates'))
         }
@@ -20,21 +20,21 @@ class TemplateManager {
 
     getFeedCards(cache) {
         const results = {
-            users: this.getUserTemplates(!cache),
-            pubs:  this.getPubTemplates(!cache),
+            users: this.getUserTemplates(!cache).map(template => template.getCardContent()),
+            pubs:  this.getPubTemplates(!cache).map(template => template.getCardContent()),
         }
-        return feedCards
+        return results
     }
 
     getTemplate(entityType, id, dontCache) {
         const key = `${entityType}_${id}`
-
+        const absolutePath = this._package.templates[entityType][id].absolutePath
         if (dontCache) {
-            return this._templateCache[key] || new Template(entityType, id)
+            return this._templateCache[key] || new Template(entityType, id, absolutePath)
         }
 
         if (!this._templateCache[key]) {
-            this._templateCache[key] = new Template(entityType, id)
+            this._templateCache[key] = new Template(entityType, id, absolutePath)
         }
         return this._templateCache[key]
     }
@@ -56,11 +56,11 @@ class TemplateManager {
     }
 
     getUserTemplateIds () {
-        return Object.keys(this.getPackage().templates.user)
+        return Object.keys(this.package.templates.user)
     }
 
     getPubTemplateIds () {
-        return Object.keys(this.getPackage().templates.pub)
+        return Object.keys(this.package.templates.pub)
     }
 }
 

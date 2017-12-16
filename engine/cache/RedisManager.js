@@ -3,7 +3,7 @@ const Q = require('q')
 const redis = require('redis');
 
 const globals = require('../globals')
-const switchboard = require('../switchboard')
+const switchboard = require('../../switchboard')
 const promiseUtils = switchboard.require('util.promises')
 
 function RedisManager() {

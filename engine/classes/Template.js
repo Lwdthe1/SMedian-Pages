@@ -1,15 +1,15 @@
 "use strict";
 
 const globals = require('../globals')
-const switchboard = require('../switchboard')
+const switchboard = require('../../switchboard')
 const TemplateVersion = switchboard.require('class.TemplateVersion')
 const TemplateFeedCard = switchboard.require('class.TemplateFeedCard')
 
 class Template {
-    constructor(entityType, id) {
+    constructor(entityType, id, absolutePath) {
         this._id = id
         this._entityType = entityType
-        this._data = JSON.parse(switchboard.fetchFileSyncFromRoot(`/templates/${entityType}/${id}/template.json`))
+        this._data = JSON.parse(switchboard.fetchFileSync(absolutePath))
         this._versionsMap = {}
     }
 
@@ -30,25 +30,27 @@ class Template {
     }
 
     getLatestVersion() {
-        return this.getVersion(this._getLatestVersionNumber())
+        return this.getVersion(this.latestVersionNumber)
     }
 
-    
-    _getLatestVersionNumber() {
-        if (this._latestVersionNumber) return this._latestVersionNumber
-
-        let latest
-        Object.keys(this._data.versions).forEach(versionNumber => {
-            if (!this._data.versions[versionNumber].isReleased) return
-            let v = parseFloat(versionNumber)
-            latest = latest && latest > v ? latest : v
-        })
-        this._latestVersionNumber = latest
+    get latestVersionNumber() {
+        if (!this._latestVersionNumber) {
+            let latest
+            Object.keys(this._data.versions).forEach(versionNumber => {
+                if (!this._data.versions[versionNumber].isReleased) return
+                let v = parseFloat(versionNumber)
+                latest = latest && latest.value > v ? latest : {value: v, versionNumber: versionNumber}
+            })
+            this._latestVersionNumber = latest && latest.versionNumber
+        }
+        return this._latestVersionNumber
     }
 
     getCardContent() {
-        const latestVersionNumber = this._getLatestVersionNumber()
         const latestVersion = this.getLatestVersion()
-        return new TemplateFeedCard(this._data.id, this._data.entityType, latestVersionNumber, latestVersion)
+        const card = new TemplateFeedCard(this._id, this._entityType, this.latestVersionNumber, latestVersion)
+        return card
     }
 }
+
+module.exports = Template

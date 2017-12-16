@@ -3,7 +3,7 @@
 const Q = require('q')
 
 const globals = require('./globals')
-const switchboard = require('./switchboard')
+const switchboard = require('../switchboard')
 const deepFreeze = require('deep-freeze-strict')
 
 /**
@@ -35,5 +35,5 @@ module.exports = {
     engine: new Engine(),
     EngineConfig: switchboard.require('config.Engine'),
     RenderPageOpts: switchboard.require('config.RenderPageOpts'),
-    templateManager: switchboard.getTemplateManager(),
+    templateManager: switchboard.templateManager,
 }

@@ -1,10 +1,12 @@
 "use strict";
 
+try {
 const Q = require('q');
 const globals = require('../../../../../engine/globals')
-const switchboard = require('../../../../../engine/switchboard')
+const switchboard = require('../../../../../switchboard')
 const promiseUtils = switchboard.require('util.promises')
 const errors = switchboard.require('util.errors')
+
 
 /**
  * This function should verify the data that is to be saved.
@@ -27,3 +29,6 @@ function beforeSave(data) {
 }
 
 module.exports = beforeSave
+}catch(err) {
+    console.log(err.stack)
+}
