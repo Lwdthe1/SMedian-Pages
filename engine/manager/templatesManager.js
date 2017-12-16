@@ -48,11 +48,11 @@ class TemplateManager {
     }
 
     getUserTemplate(id, dontCache) {
-        return this.getTemplate(sharedConstants.entityType.user, id, dontCache))
+        return this.getTemplate(sharedConstants.entityType.user, id, dontCache)
     }
 
     getPubTemplate(id, dontCache) {
-        return this.getTemplate(sharedConstants.entityType.pub, id, dontCache))
+        return this.getTemplate(sharedConstants.entityType.pub, id, dontCache)
     }
 
     getUserTemplateIds () {
