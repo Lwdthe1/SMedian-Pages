@@ -2,6 +2,8 @@
 
 const fs = require('fs');
 const Q = require('q');
+
+const globals = require('./globals')
 const promiseUtils = require('./utils/promises')
 const stringUtils = require('./utils/strings')
 const RedisManager = require('./cache/RedisManager')
@@ -10,6 +12,7 @@ const Template = require('./classes/Template')
 
 class SwitchBoard {
     constructor(name) {
+        globals.switchBoard = this
         this.name = name;
         this._redisManager = new RedisManager()
         this._fileCache = {}
