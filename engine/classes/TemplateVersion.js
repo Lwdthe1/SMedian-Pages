@@ -5,10 +5,10 @@ const promiseUtils = switchBoard.require('util.promises')
 const errors = switchBoard.require('util.errors')
 
 class TemplateVersion {
-    constructor(template, versionNumber) {
+    constructor(template, absolutePath) {
         this._template = template
         this._versionNumber = versionNumber
-        this._version = JSON.parse(switchBoard.fetchFileSync(template.getVersionAbsolutePath(versionNumber)))
+        this._version = JSON.parse(switchBoard.fetchFileSync(absolutePath))
     }
 
     /**

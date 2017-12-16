@@ -7,6 +7,9 @@
         "url": "http://lincolnwdaniel.com"
     },
     "versions": {
-        "1.0": "/path/to/version.json"
+        "1.0": {
+            "isReleased": true,
+            "absolutePath": "/templates/pub/t2/v1_0/version.json"
+        }
     }
 }

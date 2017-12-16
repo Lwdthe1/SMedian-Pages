@@ -6,14 +6,17 @@ const switchBoard = _require('./switchboard')
 const deepFreeze = _require('deep-freeze-strict')
 
 global.smedianPagesModuleShared = {
-    switchBoard: switchBoard
+    switchBoard: switchBoard,
+    constants: {
+        entityType: {user: 'user', pub: 'pub'}
+    },
 }
 /**
  * The engine for interacting with Smedian pages.
  * The engine is configurable but is a singleton
  */
 class Engine {
-    _config
+    _config: Object
     
     /**
      * 
@@ -31,7 +34,7 @@ class Engine {
     }
 
     getFeed() {
-        switchBoard.require('Feed')
+        switchBoard.getFeed()
     }
 }
 
@@ -39,4 +42,5 @@ module.exports = {
     engine: new Engine(),
     EngineConfig: switchBoard.require('config.Engine'),
     RenderPageOpts: switchBoard.require('config.RenderPageOpts'),
+    templateManager: switchBoard.getTemplateManager(),
 }
