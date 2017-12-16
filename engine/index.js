@@ -33,8 +33,8 @@ class Engine {
         ])
     }
 
-    getFeed() {
-        switchBoard.getFeed()
+    getFeedCards() {
+        switchBoard.getTemplateManager().getFeedCards()
     }
 }
 
