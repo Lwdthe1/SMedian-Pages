@@ -23,8 +23,8 @@
     "hooks": {
         "beforeSave": "/path/to/hooks/beforeSaveHook.js",
         "serverSideRenderIndex": "/path/to/hooks/serverSideRenderIndexHook.js",
-        "serverSideRenderEditorIndex": "/path/to/hooks/serverSideRenderEditorHook.js",
-        "serverSideRenderDemoIndex": "/path/to/hooks/serverSideRenderDemoHook.js"
+        "serverSideRenderEditorIndex": "/path/to/hooks/serverSideRenderEditorIndexHook.js",
+        "serverSideRenderDemoIndex": "/path/to/hooks/serverSideRenderDemoIndexHook.js"
     },
     "tests": [
         {

@@ -23,8 +23,8 @@
     "hooks": {
         "beforeSave": "/templates/pub/t1/v1_0/hooks/beforeSaveHook.js",
         "serverSideRenderIndex": "/templates/pub/t1/v1_0/hooks/serverSideRenderIndexHook.js",
-        "serverSideRenderEditorIndex": "/templates/pub/t1/v1_0/hooks/serverSideRenderEditorHook.js",
-        "serverSideRenderDemoIndex": "/templates/pub/t1/v1_0/hooks/serverSideRenderDemoHook.js"
+        "serverSideRenderEditorIndex": "/templates/pub/t1/v1_0/hooks/serverSideRenderEditorIndexHook.js",
+        "serverSideRenderDemoIndex": "/templates/pub/t1/v1_0/hooks/serverSideRenderDemoIndexHook.js"
     },
     "tests": [
         {
