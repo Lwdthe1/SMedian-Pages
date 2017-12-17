@@ -92,19 +92,19 @@ SmedianPages.User.prototype.getId = function() {
 };
 
 SmedianPages.CurrentUser.getId = function() {
-    const user = CurrentUser.get()
+    const user = SmedianPages.CurrentUser.get()
     if(!user) return
     return user.getId()
 }
 
 SmedianPages.CurrentUser.getAccessToken = function() {
-    const user = CurrentUser.get()
+    const user = SmedianPages.CurrentUser.get()
     if(!user) return
     return user.getAccessToken()
 }
 
 SmedianPages.CurrentUser.hasValidCreds = function() {
-    const user = CurrentUser.get()
+    const user = SmedianPages.CurrentUser.get()
     if(!user) return false
     return SmedianPages.User.isValidId(user.getId()) && SmedianPages.User.isValidAccessToken(user.getAccessToken())
 }

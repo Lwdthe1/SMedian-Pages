@@ -22,11 +22,11 @@ angularApp
 
     $scope.smedianPageComponentActionsMenu = new SmedianPages.component.ActionsMenu({
         page: ssrCData.page,
-        getCurrentUser: () => CurrentUser.get(),
+        getCurrentUser: () => SmedianPages.CurrentUser.get(),
     })
     
     $scope.user = $scope.page.masterObject
-    $scope.currentUser = CurrentUser.get();
+    $scope.currentUser = SmedianPages.CurrentUser.get();
 
     $scope.smedianActionsMenu = { isOpen: false }
     $scope.toggleSMedianActionsMenu = function(status) {
@@ -43,7 +43,7 @@ angularApp
     })
 
     function sendCurrentUserAccessTokenToServerSocket() {
-        if(CurrentUser.get()) SocketIO.emit('user_accessToken', CurrentUser.getAccessToken());
+        if(CurrentUser.get()) SocketIO.emit('user_accessToken', SmedianPages.CurrentUser.getAccessToken());
     }
 
     function isUrlValid(url, inDomain) {

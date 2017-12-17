@@ -4,7 +4,7 @@ angularApp
         _SocketIO = SocketIO
         
         const ssrCData = SmedianPages.getSsrCData()
-        $scope.currentUser = CurrentUser.get();
+        $scope.currentUser = SmedianPages.CurrentUser.get();
         $scope.page = ssrCData.page.pageEditor.page
         $scope.pageId = $scope.page.id
         $scope.user = $scope.page.masterObject
@@ -30,7 +30,7 @@ angularApp
         })
 
         function sendCurrentUserAccessTokenToServerSocket() {
-            if(CurrentUser.get()) SocketIO.emit('user_accessToken', CurrentUser.getAccessToken());
+            if(CurrentUser.get()) SocketIO.emit('user_accessToken', SmedianPages.CurrentUser.getAccessToken());
         }
         
         $scope.addContainerFor = function(type) {
