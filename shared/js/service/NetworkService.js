@@ -26,7 +26,7 @@ SmedianPages.service.NetworkService = function() {
             .done((data) => {
                 try {
                     opts.onSuccess(data)
-                } catch(err) {}
+                } catch(err) {debugger}
             })
             .fail((res) => {
                 try {
