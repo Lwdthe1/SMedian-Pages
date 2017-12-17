@@ -38,7 +38,7 @@
     SmedianPages.CurrentUser.set = function (accessToken, dbUser) {
         if(!accessToken) return false
         if(!dbUser) return false
-        currentUser = new User(accessToken, dbUser)
+        currentUser = new SmedianPages.User(accessToken, dbUser)
         session = SmedianPages.getSsrCData().session
         return currentUser
     }
