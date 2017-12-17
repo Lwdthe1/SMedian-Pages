@@ -1,11 +1,10 @@
 SmedianPages.component.ActionsMenu = function(config) {
     if(!config) throw new Error('[SmedianPages.component.ActionsMenu] config data is required')
     if(!config.page) throw new Error('[SmedianPages.component.ActionsMenu] page is required')
-    if(!config.getCurrentUser) throw new Error('[SmedianPages.component.ActionsMenu] getCurrentUser function is required')
 
     const self = this
     const page = config.page
-    const _getCurrentUser = config.getCurrentUser
+    var _currentUser
 
     var _openButtonSelector = '.js-SmedianPageComponentActionsMenu-openButton'
     var _closeButtonSelector = '.js-SmedianPageComponentActionsMenu-closeButton'
@@ -59,7 +58,17 @@ SmedianPages.component.ActionsMenu = function(config) {
         iframe.src = '/vendor_node/smedian-pages/shared/views/component/menu/actionsMenuComponent.html'
         iframe.onload = (result) => {
             $('body').append(document.getElementById(iframeId).contentWindow.document.body.innerHTML)
-            setTimeout(() => {_attachActions()}, 250)
+            setTimeout(() => {
+                debugger
+                _attachActions()
+                _currentUser = SmedianPages.CurrentUser.get()
+                if (_currentUser) {
+                    $('.js-SmedianPageComponentActionsMenu-currentUserAvatarContainer').show()
+                    $('.js-SmedianPageComponentActionsMenu-currentUserAvatar').attr('src', _currentUser.imageUrl)
+                } else {
+                    $('.js-SmedianPageComponentActionsMenu-nonCurrentUserAvatarContainer').show()
+                }
+            }, 250)
         }
         document.body.appendChild(iframe);
     }

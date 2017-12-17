@@ -57,14 +57,14 @@
   </ul>
 </div>
 <button id="smedian-page-services--cu-badge-container" class="smpscss-actions-badge js-SmedianPageComponentActionsMenu-openButton">
-  <span ng-show="!currentUser" style="padding-bottom: 5px;">
+  <span class="js-SmedianPageComponentActionsMenu-nonCurrentUserAvatarContainer" style="padding-bottom: 5px; display: none">
     <img src="/img/logo.png" style="width: 16px;">
   </span>
-  <span ng-show="currentUser">
-    <img style="width:32px; height: 32x; border-radius: 100%;" ng-src="{{currentUser.imageUrl}}">
+  <span class="js-SmedianPageComponentActionsMenu-currentUserAvatarContainer" style="display:none">
+    <img class="js-SmedianPageComponentActionsMenu-currentUserAvatar" style="width:32px; height: 32x; border-radius: 100%;">
     <img src="/img/logo.png" style="width: 12px; height: 12px;position: relative; bottom: 10px;right: -20px;">
   </span>
-  <div style="color:red; font-size:8px" ng-show="isPreviewPage">
+  <div class="js-SmedianPageComponentActionsMenu-pagePreviewLabel" style="color:red; font-size:8px; display: none">
     <b>PREVIEW</b>
   </div>
 </button>
