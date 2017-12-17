@@ -56,8 +56,7 @@ SmedianPages.service.AdminNetworkService = function() {
                 fileExtension: fileData.fileExtension
             }, 
             onSuccess: (response) => {
-                debugger
-                try{onSuccess(response.data)}catch(err) {}
+                try{onSuccess(response)}catch(err) {}
             },
             onFail: onFail
         })
