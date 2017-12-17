@@ -1,6 +1,6 @@
 {
   "name": "smedian-pages",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "The engine for interacting wit the Smedian Pages opensource project and its templates.",
   "repository": {
     "type": "git",
