@@ -22,6 +22,7 @@ SmedianPages.component.PhotoGallery = function(config) {
         _images.push(image)
 
         _getImagesContainerEl().prepend(_templatePhoto(image))
+        _attachImageAction()
     }
 
     try { config.images.forEach(_addImage) } catch(err) {}
@@ -34,7 +35,7 @@ SmedianPages.component.PhotoGallery = function(config) {
     var _imagesContainerSelector = '.js-SmedianPageComponentPhotoGallery-imagesContainer'
     var _imageUploadErrorLabelSelector = '.js-SmedianPageComponentPhotoGallery-imageUploadError'
 
-    const _templatePhoto = (image) => `<a class="smpscss-masonry-grid-item" data-image-id="${image.id}"><img src="${image.url}"></a>`
+    const _templatePhoto = (image) => `<button class="smpscss-masonry-grid-item js-SmedianPageComponentPhotoGallery-selectImage" data-image-id="${image.id}"><img src="${image.url}"></button>`
 
     this.attachActions = _attachActions
     
@@ -42,7 +43,6 @@ SmedianPages.component.PhotoGallery = function(config) {
         // remove existing hooks
         $(_openImageFileSelectButtonSelector).unbind()
         $(_closeButtonSelector).unbind()
-        $(_selectImageSelector).unbind()
 
         // attach hooks
         $(_openImageFileSelectButtonSelector).click(() => {
@@ -52,7 +52,10 @@ SmedianPages.component.PhotoGallery = function(config) {
         $(_closeButtonSelector).click(() => {
             _toggleShow()
         })
+    }
 
+    function _attachImageAction() {
+        $(_selectImageSelector).unbind()
         $(_selectImageSelector).click(() => {
             const imageId = $(this).data('image-id')
             _onSelectImage(_imageIdsMap[imageId])
