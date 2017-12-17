@@ -13,6 +13,7 @@ angularApp
         $scope.saved = false
 
         $scope.photoGallery = new SmedianPages.component.PhotoGallery({
+            page: $scope.page,
             images: $scope.page.scTypedArrayOfImage.values,
             onSelectImage: (image) => {
                 $scope.onPhotoGallerySelectedImage(image)
