@@ -20,7 +20,7 @@ SmedianPages.component.PhotoGallery = function(config) {
         _imageIdsMap[image.id] = image
         _images.push(image)
 
-        _imagesContainer.prepend(_templatePhoto(image))
+        _getImagesContainerEl().prepend(_templatePhoto(image))
     }
 
     try { config.images.forEach(_addImage) } catch(err) {}
@@ -30,7 +30,7 @@ SmedianPages.component.PhotoGallery = function(config) {
     var _imageUploadProgressSelector = '.js-SmedianPageComponentPhotoGallery-imageUploadProgress'
     var _closeButtonSelector = '.js-SmedianPageComponentPhotoGallery-closeButton'
     var _selectImageSelector = '.js-SmedianPageComponentPhotoGallery-selectImage'
-    var _imagesContainer = '.js-SmedianPageComponentPhotoGallery-imagesContainer'
+    var _imagesContainerSelector = '.js-SmedianPageComponentPhotoGallery-imagesContainer'
     var _imageUploadErrorLabelSelector = '.js-SmedianPageComponentPhotoGallery-imageUploadError'
 
     const _templatePhoto = (image) => `<a class="smpscss-masonry-grid-item" data-image-id="${image.id}"><img ng-src="${image.url}"></a>`
@@ -85,6 +85,7 @@ SmedianPages.component.PhotoGallery = function(config) {
                 base64Url: data.base64Url,
                 fileExtension: data.fileExtension
             }, (scImage) => {
+                debugger
                 _addImage(scImage)
                 _toggleIsUploading()
             }, (res) => {
@@ -117,6 +118,10 @@ SmedianPages.component.PhotoGallery = function(config) {
 
     function _getEl() {
         return $('.js-SmedianPageComponentPhotoGallery')
+    }
+
+    function _getImagesContainerEl() {
+        return $(_imagesContainerSelector)
     }
 
     this.onSelectImage = _onSelectImage
