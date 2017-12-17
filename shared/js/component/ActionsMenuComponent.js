@@ -58,7 +58,7 @@ SmedianPages.component.ActionsMenu = function(config) {
         iframe.id = iframeId
         iframe.src = '/vendor_node/smedian-pages/shared/views/component/menu/actionsMenuComponent.html'
         iframe.onload = (result) => {
-            $('body').append($('#' + iframeId).html())
+            $('body').append(document.getElementById(iframeId).contentWindow.document.body.innerHTML)
             _attachActions()
         }
         document.body.appendChild(iframe);
