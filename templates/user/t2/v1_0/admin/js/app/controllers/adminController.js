@@ -30,7 +30,7 @@ angularApp
         })
 
         function sendCurrentUserAccessTokenToServerSocket() {
-            if(CurrentUser.get()) SocketIO.emit('user_accessToken', SmedianPages.CurrentUser.getAccessToken());
+            if(SmedianPages.CurrentUser.get()) SocketIO.emit('user_accessToken', SmedianPages.CurrentUser.getAccessToken());
         }
         
         $scope.addContainerFor = function(type) {
