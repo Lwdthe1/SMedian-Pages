@@ -6,7 +6,7 @@ SmedianPages.component.PhotoGallery = function(config) {
     const self = this
     const _page = config.page
     const _pageId = config.page.id
-    const _adminNetworkService = SmedianPages.service.AdminNetworkService
+    const _adminNetworkService = new SmedianPages.service.AdminNetworkService()
 
     const _imageIdsMap = {}
     const _images = []
