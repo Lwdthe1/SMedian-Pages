@@ -2,7 +2,7 @@ SmedianPages.service.NetworkService = function() {
     this.get = (opts) => {
         if(!opts.url) return
         try{opts.onStart()}catch(err){}
-        $.get(opts.url)
+        $.ajax(opts.url)
             .done((data) => {
                 try {
                     opts.onSuccess(data)
@@ -18,7 +18,11 @@ SmedianPages.service.NetworkService = function() {
     this.post = (opts) => {
         if(!opts.url) return
         try{opts.onStart()}catch(err){}
-        $.post(opts.url, opts.body)
+        $.ajax({
+            method: "POST",
+            url: opts.url,
+            data: opts.body
+        })
             .done((data) => {
                 try {
                     opts.onSuccess(data)
@@ -34,7 +38,11 @@ SmedianPages.service.NetworkService = function() {
     this.put = (opts) => {
         if(!opts.url) return
         try{opts.onStart()}catch(err){}
-        $.put(opts.url, opts.body)
+        $.ajax({
+            method: "PUT",
+            url: opts.url,
+            data: opts.body
+        })
             .done((data) => {
                 try {
                     opts.onSuccess(data)
@@ -50,7 +58,10 @@ SmedianPages.service.NetworkService = function() {
     this.delete = (opts) => {
         if(!opts.url) return
         try{opts.onStart()}catch(err){}
-        $.delete(opts.url)
+        $.ajax({
+            method: "DELETE",
+            url: opts.url,
+        })
             .done((data) => {
                 try {
                     opts.onSuccess(data)
