@@ -3,6 +3,7 @@
 const globals = require('../globals')
 const switchboard = require('../../switchboard')
 const sharedConstants = globals.constants
+const promiseUtils = switchboard.require('util.promises')
 const Template = require('../classes/Template')
 const TemplateFeedCard = require('../classes/TemplateFeedCard')
 
@@ -19,11 +20,24 @@ class TemplateManager {
     }
 
     getFeedCards(cache) {
-        const results = {
-            users: this.getUserTemplates(!cache).map(template => template.getCardContent()),
-            pubs:  this.getPubTemplates(!cache).map(template => template.getCardContent()),
-        }
-        return results
+        return promiseUtils.promise(() => {
+            return {
+                users: this.getUserTemplates(!cache).map(template => template.getCardContent()),
+                pubs:  this.getPubTemplates(!cache).map(template => template.getCardContent()),
+            }
+        })
+    }
+
+    getUserFeedCards(cache) {
+        return promiseUtils.promise(() => {
+            return this.getUserTemplates(!cache).map(template => template.getCardContent())
+        })
+    }
+
+    getPubFeedCards(cache) {
+        return promiseUtils.promise(() => {
+            return this.getPubTemplates(!cache).map(template => template.getCardContent())
+        })
     }
 
     getTemplate(entityType, id, dontCache) {

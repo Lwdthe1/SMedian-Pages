@@ -59,11 +59,12 @@ SmedianPages.component.ActionsMenu = function(config) {
         iframe.onload = (result) => {
             $('body').append(document.getElementById(iframeId).contentWindow.document.body.innerHTML)
             setTimeout(() => {
-                debugger
                 $('.js-SmedianPageComponentActionsMenu-showOnlyAdmin').hide()
                 _attachActions()
                 _currentUser = SmedianPages.CurrentUser.get()
 
+                const page = _page
+                const currentUser = _currentUser
                 if (_currentUser) {
                     $('.js-SmedianPageComponentActionsMenu-currentUserAvatarContainer').show()
                     $('.js-SmedianPageComponentActionsMenu-currentUserAvatar').attr('src', _currentUser.imageUrl)
@@ -92,7 +93,7 @@ SmedianPages.component.ActionsMenu = function(config) {
                 if (!_page.currentUserIsPageAdmin && _page.masterObjectType == 'user') {
                     $('.js-SmedianPageComponentActionsMenu-containerChatLink').show()
                     $('.js-SmedianPageComponentActionsMenu-chatLink').attr('href', `/chat/${_page.masterObject.chatInviteUrl}`)
-                    $('.js-SmedianPageComponentActionsMenu-chatLink').text(`Chat With ${page.masterObject.name || page.masterObject.username}`)
+                    $('.js-SmedianPageComponentActionsMenu-chatLink').text(`Chat With ${_page.masterObject.name || _page.masterObject.username}`)
                 } else {
                     $('.js-SmedianPageComponentActionsMenu-containerChatLink').hide()
                 }
@@ -100,12 +101,13 @@ SmedianPages.component.ActionsMenu = function(config) {
                 if (_page.masterObjectType == 'user') {
                     var el = $('.js-SmedianPageComponentActionsMenu-masterUserProfileLink')
                     el.attr('href', `/writer/${_page.masterObjectId}/profile`)
-                    el.text(`${page.masterObject.name || page.masterObject.username} Profile`)
+                    el.text(`${_page.masterObject.name || _page.masterObject.username} Profile`)
                     el.show()
                 } else {
+                    debugger
                     var el = $('.js-SmedianPageComponentActionsMenu-masterPubProfileLink')
                     el.attr('href', `/p/${_page.masterObjectId}?settings=1`)
-                    el.text(`${page.masterObject.title} Dashboard`)
+                    el.text(`${_page.masterObject.name} Dashboard`)
                     el.show()
                 }
             }, 250)

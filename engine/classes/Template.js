@@ -13,7 +13,13 @@ class Template {
         this._versionsMap = {}
     }
 
-    getData() {
+    get id() {
+        return this._id
+    }
+    get entityType() {
+        return this._entityType
+    }
+    get data() {
         return this._data
     }
 
@@ -48,7 +54,7 @@ class Template {
 
     getCardContent() {
         const latestVersion = this.getLatestVersion()
-        const card = new TemplateFeedCard(this._id, this._entityType, this.latestVersionNumber, latestVersion)
+        const card = new TemplateFeedCard(this, this.latestVersionNumber, latestVersion)
         return card
     }
 }

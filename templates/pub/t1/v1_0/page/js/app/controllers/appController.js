@@ -24,7 +24,7 @@ angularApp
         $scope.currentUser = SmedianPages.CurrentUser.get();
 
         $scope.smedianPageComponentActionsMenu = new SmedianPages.component.ActionsMenu({
-            page: ssrCData.page,
+            page: (ssrCData.page.previewPage || ssrCData.page.publishedPage).page,
             getCurrentUser: () => SmedianPages.CurrentUser.get(),
         })
 

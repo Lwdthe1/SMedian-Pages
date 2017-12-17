@@ -26,17 +26,8 @@
   },
   "dependencies": {
     "deep-freeze-strict": "1.1.1",
-    "jQuery": "^1.7.4",
-    "jsdom": "9.12.0",
     "ng-node-compile": "2.0.52",
     "q": "1.4.1",
     "redis": "^2.8.0"
-  },
-  "devDependencies": {
-    "eslint": "^4.8.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-promise": "^2.0.0",
-    "eslint-plugin-standard": "^2.0.0",
-    "nodemon": "^1.10.0"
   }
 }

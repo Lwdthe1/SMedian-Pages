@@ -1,9 +1,10 @@
 "use strict";
 
 class TemplateFeedCard {
-    constructor(id, entityType, latestVersionNumber, latestVersion) {
-        this.id = id
-        this.entityType = entityType
+    constructor(template, latestVersionNumber, latestVersion) {
+        this.id = template.id
+        this.entityType = template.entityType
+        this.developer = template.data.developer
         this.latestVersionNumber = latestVersionNumber
         this.fullTitle = latestVersion.title
         this.fullDescription = latestVersion.description
