@@ -246,9 +246,7 @@ SmedianPages.component.PhotoGallery = function(config) {
         iframe.src = '/vendor_node/smedian-pages/shared/views/component/photoGalleryComponent.html'
         iframe.onload = (_, html) => {
             $('body').append(document.getElementById(iframeId).contentWindow.document.body.innerHTML)
-            setTimeout(() => {
-            _attachActions()
-            })
+            setTimeout(() => {_attachActions()}, 250)
         }
         document.body.appendChild(iframe);
     }
