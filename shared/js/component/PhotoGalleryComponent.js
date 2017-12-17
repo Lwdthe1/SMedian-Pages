@@ -1,7 +1,11 @@
 SmedianPages.component.PhotoGallery = function(config) {
     if(!config) throw new Error('[SMedianPageComponentPhotoGallery] config data is required')
-    
+    if(!config.page) throw new Error('[SMedianPageComponentPhotoGallery] config must have a page')
+    if(!config.page.id) throw new Error('[SMedianPageComponentPhotoGallery] config must have a valid page')
+
     const self = this
+    const _page = config.page
+    const _pageId = config.page.id
     const _adminNetworkService = SmedianPages.service.AdminNetworkService
 
     const _imageIdsMap = {}
@@ -77,7 +81,7 @@ SmedianPages.component.PhotoGallery = function(config) {
         _attachJQueryImageUploadBase64BySelector('.js-SmedianPageComponentPhotoGallery-startImageUpload', (data) => {
             delete self.uploadError
             _toggleIsUploading(true)
-            _adminNetworkService.uploadImage($scope.pageId, {
+            _adminNetworkService.uploadImage(_pageId, {
                 base64Url: data.base64Url,
                 fileExtension: data.fileExtension
             }, (scImage) => {
