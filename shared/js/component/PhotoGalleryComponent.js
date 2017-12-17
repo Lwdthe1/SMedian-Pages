@@ -15,7 +15,6 @@ SmedianPages.component.PhotoGallery = function(config) {
     this.addImage = _addImage
 
     function _addImage(image) {
-        debugger
         if(!image) return
         if(_imageIdsMap[image.id]) return
         _imageIdsMap[image.id] = image
@@ -59,7 +58,6 @@ SmedianPages.component.PhotoGallery = function(config) {
         $(_selectImageSelector).click(function() {
             const c = $(this)
             const imageId = c.attr('data-image-id')
-            debugger
             _onSelectImage(_imageIdsMap[imageId])
         })
     }
@@ -135,7 +133,7 @@ SmedianPages.component.PhotoGallery = function(config) {
         try {
             config.onSelectImage(image)
         } catch(err) {}
-        self.show = false
+        _toggleShow()
     }
 
     function _getBase64(file, onSuccess, onError) {
@@ -167,9 +165,8 @@ SmedianPages.component.PhotoGallery = function(config) {
                     return onFail(new Error('Not a supported image file: ' + file.type))
                 }
                 _getBase64(file, (base64Url) => {
-                    if(getBase64SizeKb(base64Url) > 60144 /* 6MB*/) {
-                        debugger
-                        return onFail && onFail(new Error('Image must be smaller than 1MB'))
+                    if(getBase64SizeKb(base64Url) > 3072 /* 3MB*/) {
+                        return onFail && onFail(new Error('Image must be smaller than 3MB'))
                     }
                     downscaleImage({
                         dataUrl: base64Url,
