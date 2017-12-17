@@ -1,9 +1,9 @@
 {
     "title": "Title",
-    "description": "long text",
+    "description": "Short and sweet landing page for a writer on the move.",
     "card": {
         "title": "Title",
-        "description": "long text",
+        "description": "Short and sweet landing page for a writer on the move.",
         "imageAbsolutePath": "/templates/user/t2/v1_0/thumb_image.png"
     },
     "indexAbsolutePath": "/templates/user/t2/v1_0/page/index.hbs",

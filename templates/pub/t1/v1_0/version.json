@@ -1,9 +1,9 @@
 {
     "title": "Title",
-    "description": "long text",
+    "description": "A landing page fit for a publication.",
     "card": {
         "title": "Title",
-        "description": "long text",
+        "description": "A landing page fit for a publication.",
         "imageAbsolutePath": "/templates/pub/t1/v1_0/thumb_image.png"
     },
     "indexAbsolutePath": "/templates/pub/t1/v1_0/page/index.hbs",
