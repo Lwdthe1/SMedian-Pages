@@ -14,17 +14,13 @@ const errors = switchboard.require('util.errors')
  * @required
  */
 function Renderer(templateVersion) {
-    this._templateVersion = templateVersion
     this.run = (pageOpts) => {
-        return promiseUtils.promise(() => {
-            const data = pageOpts.templateData
-            // fetch the template 
-            const template = templateVersion.get
-
-            // use the template data to render the template
-            var html = template.replace('{{variable}}', data.variable)
-            return html
-        })
+        return templateVersion.promiseDemoIndexHtml()
+            .then((template) => {
+                var html = '<html ng-app="angularApp" ng-controller="AppCtrl"><head>' + template
+                html = html.replace('0/*<<|cdata|>>*/;', JSON.stringify(pageOpts.currentUserData))
+                return html      
+            })
     }
 }
 

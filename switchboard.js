@@ -42,12 +42,12 @@ class SwitchBoard {
             case 'config.Engine': return require('./engine/config/EngineConfig')
             case 'util.promises': return require('./engine/utils/promises')
             case 'util.errors': return require('./engine/utils/errors')
-            case 'util.strings': return require('./engine/utils/promises')
-            case 'util.numbers': return require('./engine/utils/promises')
-            case 'util.arrays': return require('./engine/utils/promises')
-            case 'util.objects': return require('./engine/utils/promises')
-            case 'util.functions': return require('./engine/utils/promises')
-            case 'util.dates': return require('./engine/utils/promises')
+            case 'util.strings': return require('./engine/utils/strings')
+            case 'util.numbers': return require('./engine/utils/numbers')
+            case 'util.arrays': return require('./engine/utils/arrays')
+            case 'util.objects': return require('./engine/utils/objects')
+            case 'util.functions': return require('./engine/utils/functions')
+            case 'util.dates': return require('./engine/utils/dates')
             case 'manager.redis': return require('./engine/cache/RedisManager')
             default: throw new Error(`Unsupported fileId: ${fileId}`)
         }
@@ -66,9 +66,6 @@ class SwitchBoard {
     }
 
     /**
-     * Fetches a file by its unique id
-     * @private
-     * @param {string} id A unique id for the file being fetched
      * @param {string} path The path to the file
      * @param {string} encoding The encoding to fetch the file in
      */
@@ -80,9 +77,6 @@ class SwitchBoard {
     }
 
     /**
-     * Fetches a file by its unique id
-     * @private
-     * @param {string} id A unique id for the file being fetched
      * @param {string} path The path to the file
      * @param {string} encoding The encoding to fetch the file in
      */
@@ -91,6 +85,40 @@ class SwitchBoard {
             this._fileCache[path] = fs.readFileSync(pathFromEngine(path), encoding || 'utf8')
         }
         return this._fileCache[path]
+    }
+
+    /**
+     * @param {string} path The path to the file
+     * @param {string} encoding The encoding to fetch the file in
+     */
+    promiseFile(path, encoding) {
+        return Q.Promise((resolve, reject) => {
+            if (this._fileCache[path]) {
+                return resolve(this._fileCache[path])
+            }
+            return fs.readFile(absolutePathFromRoot(path), encoding || 'utf8', (err, data) => {
+                if (err) return reject(err)
+                this._fileCache[path] =  data
+                resolve(data)
+            })
+        })
+    }
+
+    /**
+     * @param {string} path The path to the file
+     * @param {string} encoding The encoding to fetch the file in
+     */
+    promiseEngineFile(path, encoding) {
+        return Q.Promise((resolve, reject) => {
+            if (this._fileCache[path]) {
+                return resolve(this._fileCache[path])
+            }
+            return fs.readFile(pathFromEngine(path), encoding || 'utf8', (err, data) => {
+                if (err) return reject(err)
+                this._fileCache[path] =  data
+                resolve(data)
+            })
+        })
     }
 
     static pathFromEngine(path) {

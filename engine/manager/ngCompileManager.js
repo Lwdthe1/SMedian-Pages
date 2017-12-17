@@ -4,7 +4,6 @@ const Q = require('q')
 const NgNodeCompile = require('ng-node-compile')
 
 class Manager {
-    _ngEnviroment
     prepare() {
         if (this._ngEnviroment) return Q.resolve()
         return Q.Promise((resolve, reject) => {
@@ -14,7 +13,7 @@ class Manager {
             })
         })
     }
-    getEnvironment() {
+    getEnv() {
         return this._ngEnviroment
     }
 }

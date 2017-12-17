@@ -3,11 +3,13 @@
 const globals = require('../globals')
 const switchboard = require('../../switchboard')
 const promiseUtils = switchboard.require('util.promises')
+const stringUtils = switchboard.require('util.strings')
 const errors = switchboard.require('util.errors')
 
 class TemplateVersion {
     constructor(versionNumber, absolutePath) {
         this._versionNumber = versionNumber
+        this._versionFolder = 'v' + stringUtils.replaceAll(versionNumber, '.', '_')
         this._package = JSON.parse(switchboard.fetchFileSync(absolutePath))
 
         this.title = this._package.title
@@ -19,6 +21,14 @@ class TemplateVersion {
         this.demoIndexAbsolutePath = this._package.demoIndexAbsolutePath
         this.imageAbsolutePath = this._package.imageAbsolutePath
         this.keywords = this._package.keywords
+    }
+
+    get versionNumber() {
+        return this._versionNumber
+    }
+
+    get versionFolder() {
+        return this._versionFolder
     }
     
     getHookAbsolutePath(key) {
@@ -72,22 +82,22 @@ class TemplateVersion {
     /**
      * @required
      */
-    getIndexHtml() {
-        return switchboard.fetchFileSync(this._package.indexAbsolutePath)
+    promiseIndexHtml() {
+        return switchboard.promiseFile(this._package.indexAbsolutePath)
     }
 
     /**
      * @required
      */
-    getEditorIndexHtml() {
-        return switchboard.fetchFileSync(this._package.editorIndexAbsolutePath)
+    promiseEditorIndexHtml() {
+        return switchboard.promiseFile(this._package.editorIndexAbsolutePath)
     }
 
     /**
      * @required
      */
-    getDemoIndexHtml() {
-        return switchboard.fetchFileSync(this._package.demoIndexAbsolutePath)
+    promiseDemoIndexHtml() {
+        return switchboard.promiseFile(this._package.demoIndexAbsolutePath)
     }
 }
 

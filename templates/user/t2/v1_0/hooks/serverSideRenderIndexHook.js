@@ -14,16 +14,39 @@ const errors = switchboard.require('util.errors')
  * @required
  */
 function Renderer(templateVersion) {
+    var _ngEnv
     this.run = (pageOpts) => {
-        return promiseUtils.promise(() => {
-            const data = pageOpts.templateData
-            // fetch the template 
-            const template = this.getHomeHtml()
+        return Q.all([templateVersion.promiseIndexHtml(), switchboard.promiseFile('/templates/user/t2/v1_0/page/views/home.html')])
+            .spread((indexTemplateResult, homeTemplateResult) => {
+                let template = indexTemplateResult
+                let indexHomeTemplate = homeTemplateResult
+                
+                const ssrNgViewHTML = '<span id="ssr-view-rmwr" style="position:absolute; left:-50000px">' + indexHomeTemplate + '</span>'
+                template = template.replace('<span id="ssr-view-rmwr"></span>', ssrNgViewHTML)
+                template = template.replace('<span id="ssr-view-rmwr" class="ng-scope"></span>', ssrNgViewHTML)
 
-            // use the template data to render the template
-            var html = template.replace('{{variable}}', data.variable)
-            return html
-        })
+                return _renderTemplateWithData(template, pageOpts.templateData)
+            })
+            .then((html) => {
+                html = '<html ng-app="angularApp" ng-controller="AppCtrl"><head>' + html
+                html = html.replace('0/*<<|cdata|>>*/;', JSON.stringify(pageOpts.currentUserData))
+                return html
+            })
+    }
+
+    function _renderTemplateWithData(template, templateData) {
+        return _getNgEnv()
+            .then((ngEnv) => {
+                return ngEnv.$compile(template)(templateData)
+            })
+    }
+
+    function _getNgEnv() {
+        if (!_ngEnv) {
+            _ngEnv = switchboard.require('manager.NgCompile')
+        }
+        return _ngEnv.prepare()
+            .then(() => _ngEnv.getEnv())
     }
 }
 
