@@ -59,7 +59,9 @@ SmedianPages.component.ActionsMenu = function(config) {
         iframe.src = '/vendor_node/smedian-pages/shared/views/component/menu/actionsMenuComponent.html'
         iframe.onload = (result) => {
             $('body').append(document.getElementById(iframeId).contentWindow.document.body.innerHTML)
-            _attachActions()
+            setTimeout(() => {
+                _attachActions()
+            }, 1000)
         }
         document.body.appendChild(iframe);
     }
