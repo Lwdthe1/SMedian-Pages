@@ -13,16 +13,19 @@ const errors = switchboard.require('util.errors')
  * @param {RenderPageOpts} pageOpts 
  * @required
  */
-function renderPage(pageOpts) {
-    return promiseUtils.promise(() => {
-        const data = pageOpts.templateData
-        // fetch the template 
-        const template = this.getHomeHtml()
+function Renderer(templateVersion) {
+    this._templateVersion = templateVersion
+    this.run = (pageOpts) => {
+        return promiseUtils.promise(() => {
+            const data = pageOpts.templateData
+            // fetch the template 
+            const template = templateVersion.get
 
-        // use the template data to render the template
-        var html = template.replace('{{variable}}', data.variable)
-        return html
-    })
+            // use the template data to render the template
+            var html = template.replace('{{variable}}', data.variable)
+            return html
+        })
+    }
 }
 
-module.exports = renderPage
+module.exports = Renderer

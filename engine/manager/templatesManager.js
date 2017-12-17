@@ -28,7 +28,7 @@ class TemplateManager {
 
     getTemplate(entityType, id, dontCache) {
         const key = `${entityType}_${id}`
-        const absolutePath = this._package.templates[entityType][id].absolutePath
+        const absolutePath = this.package.templates[entityType][id].absolutePath
         if (dontCache) {
             return this._templateCache[key] || new Template(entityType, id, absolutePath)
         }

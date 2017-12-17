@@ -22,7 +22,9 @@
     },
     "hooks": {
         "beforeSave": "/templates/user/t1/v1_0/hooks/beforeSaveHook.js",
-        "serverSideRender": "/templates/user/t1/v1_0/hooks/serverSideRenderHook.js"
+        "serverSideRenderIndex": "/templates/user/t1/v1_0/hooks/serverSideRenderIndexHook.js",
+        "serverSideRenderEditorIndex": "/templates/user/t1/v1_0/hooks/serverSideRenderEditorHook.js",
+        "serverSideRenderDemoIndex": "/templates/user/t1/v1_0/hooks/serverSideRenderDemoHook.js"
     },
     "tests": [
         {

@@ -27,7 +27,7 @@ class Engine {
     }
 
     getFeedCards() {
-        switchboard.getTemplateManager().getFeedCards()
+        switchboard.templatesManager.getFeedCards()
     }
 }
 
@@ -35,5 +35,6 @@ module.exports = {
     engine: new Engine(),
     EngineConfig: switchboard.require('config.Engine'),
     RenderPageOpts: switchboard.require('config.RenderPageOpts'),
-    templateManager: switchboard.templateManager,
+    templatesManager: switchboard.templatesManager,
+    constants: globals.constants,
 }

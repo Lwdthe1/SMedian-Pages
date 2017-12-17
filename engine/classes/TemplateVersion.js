@@ -30,11 +30,39 @@ class TemplateVersion {
     }
 
     getBeforeSaveHook() {
-        return this.getHook('beforeSave')
+        if (!this._beforeSaveHook) {
+            const Hook = this.getHook('beforeSave')
+            this._beforeSaveHook = new Hook(this)
+        }
+        
+        return this._beforeSaveHook
     }
 
-    getServerSideRenderHook() {
-        return this.getHook('serverSideRender')
+    getServerSideRenderIndexHook() {
+        if (!this._serverSideRenderIndexHook) {
+            const Hook = this.getHook('serverSideRenderIndex')
+            this._serverSideRenderIndexHook = new Hook(this)
+        }
+        
+        return this._serverSideRenderIndexHook
+    }
+
+    getServerSideRenderEditorIndexHook() {
+        if (!this._serverSideRenderEditorIndexHook) {
+            const Hook = this.getHook('serverSideRenderEditorIndex')
+            this._serverSideRenderEditorIndexHook = new Hook(this)
+        }
+        
+        return this._serverSideRenderEditorIndexHook
+    }
+
+    getServerSideRenderDemoIndexHook() {
+        if (!this._serverSideRenderDemoIndexHook) {
+            const Hook = this.getHook('serverSideRenderDemoIndex')
+            this._serverSideRenderDemoIndexHook = new Hook(this)
+        }
+        
+        return this._serverSideRenderDemoIndexHook
     }
 
     get card(){

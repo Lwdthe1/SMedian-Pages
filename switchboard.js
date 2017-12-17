@@ -24,7 +24,7 @@ class SwitchBoard {
         return this._redisManager
     }
 
-    get templateManager() {
+    get templatesManager() {
         if (!this._templatesManager) {
             this._templatesManager = require('./engine/manager/templatesManager')
         }
