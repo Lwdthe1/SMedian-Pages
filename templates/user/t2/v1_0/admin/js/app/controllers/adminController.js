@@ -3,7 +3,7 @@ angularApp
 	.controller('AppCtrl', function AppCtrl($scope, $sce, $window, $location, $timeout, $routeParams, SocketIO, PageAdminService) {
         _SocketIO = SocketIO
         
-        const ssrCData = MainApp.getSsrCData()
+        const ssrCData = SmedianPages.getSsrCData()
         $scope.currentUser = CurrentUser.get();
         $scope.page = ssrCData.page.pageEditor.page
         $scope.pageId = $scope.page.id

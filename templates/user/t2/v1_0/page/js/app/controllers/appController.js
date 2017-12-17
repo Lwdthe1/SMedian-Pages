@@ -7,7 +7,7 @@ angularApp
         return target.replace(new RegExp(search, 'g'), replacement);
     };
 
-    const ssrCData = MainApp.getSsrCData()
+    const ssrCData = SmedianPages.getSsrCData()
     const ssrCDataPage = ssrCData.page.previewPage || ssrCData.page.publishedPage
     if(ssrCData.page.publishedPage) {
         $scope.isPreviewPage = false
