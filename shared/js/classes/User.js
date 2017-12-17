@@ -4,7 +4,7 @@
 (function(){
     var currentUser
     var session = {}
-    SmedianPages.CurrentUser = {}
+    SmedianPages.CurrentUser = function() {}
     SmedianPages.User = function(accessToken, scUser) {
         const isCurrentUser = currentUser && currentUser.id == scUser.id
         this.accessToken = accessToken
