@@ -39,12 +39,12 @@
         if(!accessToken) return false
         if(!dbUser) return false
         currentUser = new User(accessToken, dbUser)
-        session = MainApp.getSsrCData().session
+        session = SmedianPages.getSsrCData().session
         return currentUser
     }
 
     SmedianPages.CurrentUser.get = function() {
-        if(!currentUser) MainApp.getAndSetCurrentUserFromPage()
+        if(!currentUser) SmedianPages.getAndSetCurrentUserFromPage()
         return currentUser
     }
 
