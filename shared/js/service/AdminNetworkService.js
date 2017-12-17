@@ -49,7 +49,7 @@ SmedianPages.service.AdminNetworkService = function() {
     }
 
     this.uploadImage = function(pageId, fileData, onSuccess, onFail) {
-        return $.put({
+        return $.post({
             url: '/api/i/page/' + pageId + '/mod/upload/image', 
             body: {
                 base64: fileData.base64Url,
