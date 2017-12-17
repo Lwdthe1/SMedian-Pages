@@ -12,47 +12,21 @@
         </a>
       </h3>
     </li>
-    <li class="smpscss-card" ng-if="page.currentUserIsPageAdmin">
-      <a class="smpscss-clean-button smpscss-clean-button--plain" target="_blank"
-        href="/writer/{{page.masterObjectId}}/profile" ng-if="page.masterObjectType == 'user'">
-        My Profile
-      </a>
-      <a class="smpscss-clean-button smpscss-clean-button--plain" target="_blank"
-        href="/p/{{page.masterObjectId}}?settings=1" ng-if="page.masterObjectType == 'pub'">
-        Publication Dashboard
-      </a>
+    <li class="smpscss-card">
+      <a class="smpscss-clean-button smpscss-clean-button--plain js-SmedianPageComponentActionsMenu-masterUserProfileLink" style="display:none" target="_blank"></a>
+      <a class="smpscss-clean-button smpscss-clean-button--plain js-SmedianPageComponentActionsMenu-masterPubProfileLink" style="display:none" target="_blank"></a>
     </li>
-    <li class="smpscss-card" ng-if="page.currentUserIsPageAdmin">
-      <a class="smpscss-clean-button smpscss-clean-button--plain" target="_blank"
-        href="/page/{{page.id}}/_/admin">
-        Edit Page
-      </a>
+    <li class="smpscss-card js-SmedianPageComponentActionsMenu-showOnlyAdmin" style="display:none">
+      <a class="smpscss-clean-button smpscss-clean-button--plain js-SmedianPageComponentActionsMenu-adminEditPageLink" target="_blank">Edit Page</a>
     </li>
-    <li class="smpscss-card" ng-if="page.currentUserIsPageAdmin">
-      <a class="smpscss-clean-button smpscss-clean-button--plain" target="_blank"
-        href="/vendor_node/smedian-pages/{{page.masterObjectType}}/{{page.masterObjectId}}" ng-if="page.currentUserIsPageAdmin">
-        All My Pages
-      </a>
+    <li class="smpscss-card js-SmedianPageComponentActionsMenu-showOnlyAdmin" style="display:none">
+      <a class="smpscss-clean-button smpscss-clean-button--plain js-SmedianPageComponentActionsMenu-adminAllPagesLink" target="_blank">All My Pages</a>
     </li>
-
-    <li class="smpscss-card" ng-if="!page.currentUserIsPageAdmin && page.masterObjectType == 'user'">
-      <a class="smpscss-clean-button smpscss-clean-button--plain" target="_blank"
-        href="/chat/{{page.masterObject.chatInviteUrl}}">
-        Chat With {{page.masterObject.name || page.masterObject.username}}
-      </a>
+    <li class="smpscss-card js-SmedianPageComponentActionsMenu-containerChatLink" style="display:none">
+      <a class="smpscss-clean-button smpscss-clean-button--plain js-SmedianPageComponentActionsMenu-chatLink" target="_blank"></a>
     </li>
-    <li class="smpscss-card" ng-if="currentUser && !page.currentUserIsPageAdmin">
-      <a class="smpscss-clean-button smpscss-clean-button--plain" target="_blank"
-        href="/vendor_node/smedian-pages/user/{{currentUser.id}}">
-        <span ng-if="currentUser.homePageId">All My Pages</span>
-        <span ng-if="!currentUser.homePageId">Make Mine</span>
-      </a>
-    </li>
-    <li class="smpscss-card" ng-if="!page.currentUserIsPageAdmin">
-      <a class="smpscss-clean-button smpscss-clean-button--plain" target="_blank"
-        href="/pages">
-        <span ng-if="!currentUser.homePageId">Make Mine</span>
-      </a>
+    <li class="smpscss-card js-SmedianPageComponentActionsMenu-containerMyPagesLink" style="display:none">
+      <a class="smpscss-clean-button smpscss-clean-button--plain js-SmedianPageComponentActionsMenu-myPagesLink" target="_blank"></a>
     </li>
   </ul>
 </div>

@@ -26,6 +26,7 @@
     bottom: 10px; 
     right: 10px; 
     z-index: 9000000000 !important;
+    max-width: 60%;
 }
 
 .smpscss-actions-badge,
