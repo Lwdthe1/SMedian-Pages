@@ -1,4 +1,4 @@
-<div class="smpscss-smedian-actions-menu js-SmedianPageComponentActionsMenu" style="display:none">
+<div class="smpscss-actions-menu js-SmedianPageComponentActionsMenu" style="display:none">
   <a class="smpscss-clean-button smpscss-clean-button--plain js-SmedianPageComponentActionsMenu-closeButton" 
     style="position: absolute; top: 10px; right:10px; font-size: 24px" title="Close Smedian Menu">
       <b>×</b>
@@ -14,43 +14,43 @@
     </li>
     <li class="smpscss-card" ng-if="page.currentUserIsPageAdmin">
       <a class="smpscss-clean-button smpscss-clean-button--plain" target="_blank"
-        ng-href="/writer/{{page.masterObjectId}}/profile" ng-if="page.masterObjectType == 'user'">
+        href="/writer/{{page.masterObjectId}}/profile" ng-if="page.masterObjectType == 'user'">
         My Profile
       </a>
       <a class="smpscss-clean-button smpscss-clean-button--plain" target="_blank"
-        ng-href="/p/{{page.masterObjectId}}?settings=1" ng-if="page.masterObjectType == 'pub'">
+        href="/p/{{page.masterObjectId}}?settings=1" ng-if="page.masterObjectType == 'pub'">
         Publication Dashboard
       </a>
     </li>
     <li class="smpscss-card" ng-if="page.currentUserIsPageAdmin">
       <a class="smpscss-clean-button smpscss-clean-button--plain" target="_blank"
-        ng-href="/page/{{page.id}}/_/admin">
+        href="/page/{{page.id}}/_/admin">
         Edit Page
       </a>
     </li>
     <li class="smpscss-card" ng-if="page.currentUserIsPageAdmin">
       <a class="smpscss-clean-button smpscss-clean-button--plain" target="_blank"
-        ng-href="/vendor_node/smedian-pages/{{page.masterObjectType}}/{{page.masterObjectId}}" ng-if="page.currentUserIsPageAdmin">
+        href="/vendor_node/smedian-pages/{{page.masterObjectType}}/{{page.masterObjectId}}" ng-if="page.currentUserIsPageAdmin">
         All My Pages
       </a>
     </li>
 
     <li class="smpscss-card" ng-if="!page.currentUserIsPageAdmin && page.masterObjectType == 'user'">
       <a class="smpscss-clean-button smpscss-clean-button--plain" target="_blank"
-        ng-href="/chat/{{page.masterObject.chatInviteUrl}}">
+        href="/chat/{{page.masterObject.chatInviteUrl}}">
         Chat With {{page.masterObject.name || page.masterObject.username}}
       </a>
     </li>
     <li class="smpscss-card" ng-if="currentUser && !page.currentUserIsPageAdmin">
       <a class="smpscss-clean-button smpscss-clean-button--plain" target="_blank"
-        ng-href="/vendor_node/smedian-pages/user/{{currentUser.id}}">
+        href="/vendor_node/smedian-pages/user/{{currentUser.id}}">
         <span ng-if="currentUser.homePageId">All My Pages</span>
         <span ng-if="!currentUser.homePageId">Make Mine</span>
       </a>
     </li>
     <li class="smpscss-card" ng-if="!page.currentUserIsPageAdmin">
       <a class="smpscss-clean-button smpscss-clean-button--plain" target="_blank"
-        ng-href="/pages">
+        href="/pages">
         <span ng-if="!currentUser.homePageId">Make Mine</span>
       </a>
     </li>
