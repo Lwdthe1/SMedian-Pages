@@ -109,6 +109,10 @@ SmedianPages.CurrentUser.hasValidCreds = function() {
     return SmedianPages.User.isValidId(user.getId()) && SmedianPages.User.isValidAccessToken(user.getAccessToken())
 }
 
+SmedianPages.User.prototype.getAccessToken = function() {
+    return this.accessToken;
+};
+
 SmedianPages.User.isValidId = function (dbObjectId) {
     if(!dbObjectId) return false
     return SmedianPages.VALID_OBJECT_ID_REGEX.test(dbObjectId)
