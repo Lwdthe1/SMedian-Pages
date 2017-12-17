@@ -15,6 +15,7 @@ SmedianPages.component.PhotoGallery = function(config) {
     this.addImage = _addImage
 
     function _addImage(image) {
+        debugger
         if(!image) return
         if(_imageIdsMap[image.id]) return
         _imageIdsMap[image.id] = image
@@ -33,7 +34,7 @@ SmedianPages.component.PhotoGallery = function(config) {
     var _imagesContainerSelector = '.js-SmedianPageComponentPhotoGallery-imagesContainer'
     var _imageUploadErrorLabelSelector = '.js-SmedianPageComponentPhotoGallery-imageUploadError'
 
-    const _templatePhoto = (image) => `<a class="smpscss-masonry-grid-item" data-image-id="${image.id}"><img ng-src="${image.url}"></a>`
+    const _templatePhoto = (image) => `<a class="smpscss-masonry-grid-item" data-image-id="${image.id}"><img src="${image.url}"></a>`
 
     this.attachActions = _attachActions
     
@@ -85,7 +86,6 @@ SmedianPages.component.PhotoGallery = function(config) {
                 base64Url: data.base64Url,
                 fileExtension: data.fileExtension
             }, (scImage) => {
-                debugger
                 _addImage(scImage)
                 _toggleIsUploading()
             }, (res) => {
