@@ -242,7 +242,7 @@ SmedianPages.component.PhotoGallery = function(config) {
         var iframe = document.createElement('iframe');
         iframe.style.display = "none";
         iframe.src = '/vendor_node/smedian-pages/shared/views/component/photoGalleryComponent.html'
-        iframe.onload = (html) => {
+        iframe.onload = (_, html) => {
             debugger
             $('body').append(html)
             _attachActions()
