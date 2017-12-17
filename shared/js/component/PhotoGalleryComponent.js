@@ -239,12 +239,14 @@ SmedianPages.component.PhotoGallery = function(config) {
             return
         }
         
+        const iframeId = Date.now() + 'jfkhgd-dsfiuy897y9rihjwek-iframe'
         var iframe = document.createElement('iframe');
         iframe.style.display = "none";
+        iframe.id = iframeId
         iframe.src = '/vendor_node/smedian-pages/shared/views/component/photoGalleryComponent.html'
         iframe.onload = (_, html) => {
             debugger
-            $('body').append(html)
+            $('body').append($('#' + iframeId).html())
             _attachActions()
         }
         document.body.appendChild(iframe);
