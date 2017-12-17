@@ -84,7 +84,7 @@
         }
     }
 
-    SmedianPages.User.getCurrent = CurrentUser.get
+    SmedianPages.User.getCurrent = SmedianPages.CurrentUser.get
 }())
 
 SmedianPages.User.prototype.getId = function() {

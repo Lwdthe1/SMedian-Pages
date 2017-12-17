@@ -38,7 +38,7 @@ SmedianPages.getSsrCData = () => {
 SmedianPages.getAndSetCurrentUserFromPage = () => {
     const currentUserFromServer = SmedianPages.getSsrCData().currentUser
     const currentUserAccessTokenFromServer = SmedianPages.getSsrCData().accessToken
-    return CurrentUser.set(currentUserAccessTokenFromServer, currentUserFromServer)
+    return SmedianPages.CurrentUser.set(currentUserAccessTokenFromServer, currentUserFromServer)
 }
 
 
