@@ -56,7 +56,7 @@ SmedianPages.component.PhotoGallery = function(config) {
 
     function _attachImageAction() {
         $(_selectImageSelector).unbind()
-        $(_selectImageSelector).click(() => {
+        $(_selectImageSelector).click(function() {
             const c = $(this)
             const imageId = c.attr('data-image-id')
             debugger
