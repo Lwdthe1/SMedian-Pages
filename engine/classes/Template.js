@@ -27,6 +27,10 @@ class Template {
         return this._data.versions[versionNumber].absolutePath
     }
 
+    hasVersion(versionNumber) {
+        return !!this._data.versions[versionNumber]
+    }
+
     getVersion(versionNumber) {
         if (!versionNumber) return
         if (!this._versionsMap[versionNumber]) {

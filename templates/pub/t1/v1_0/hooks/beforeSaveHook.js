@@ -18,12 +18,6 @@ const errors = switchboard.require('util.errors')
 function BeforeSave(templateVersion) {
     this.run = function(data) {
         return promiseUtils.promise(() => {
-            if (data.someInvalidValue) {
-                throw errors.errorWithStatus('some error message', 400)
-            }
-
-            // modify the data if you'd like
-            data.someOtherField = data.someField + ' this was modified by the server'
             return data 
         })
     }
