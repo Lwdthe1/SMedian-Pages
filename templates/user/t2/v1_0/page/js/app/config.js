@@ -4,7 +4,7 @@ angularApp
         $routeProvider
             //when the user navigates to the root, index of our app
             .when("/", {
-                templateUrl: "/api/e/web/html?path=pages/templates/user/t2/page/views/home.html",
+                templateUrl: "/api/e/web/html?smedianPagesAbsolutePath=/templates/user/t2/v1_0/page/views/home.html",
                 controller: "HomeController"
             })
             //otherwise, default to sending them to the index page
