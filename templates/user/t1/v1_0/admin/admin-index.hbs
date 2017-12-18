@@ -431,7 +431,7 @@
                 <input ng-model="featuredStory.url" ng-change="onDraftDataChange(); getFeaturedMediumArticleData(featuredStory)" class="form-field w-input" id="user-featured-story-url-12" maxlength="256" name="user-featured-story-url-12" placeholder="https://medium.com/..."  type="text">
                 <input ng-model="featuredStory.title" ng-change="onDraftDataChange()" class="form-field w-input" id="user-featured-story-url-12" maxlength="256" name="user-featured-story-url-12" placeholder="Title"  type="text">
                 <input ng-model="featuredStory.description" ng-change="onDraftDataChange()" class="form-field w-input" id="user-featured-story-url-12" maxlength="256" name="user-featured-story-url-12" placeholder="Description"  type="text">
-                <input ng-model="featuredStory.imageUrl" ng-change="onDraftDataChange()" class="form-field w-input" id="user-featured-story-url-12" maxlength="256" name="user-featured-story-url-12" placeholder="http://example.com/images/example.png"  type="text">
+                <input ng-model="{{featuredStory.imageUrl}}" ng-change="onDraftDataChange()" class="form-field w-input" id="user-featured-story-url-12" maxlength="256" name="user-featured-story-url-12" placeholder="http://example.com/images/example.png"  type="text">
                 <img ng-src="{{featuredStory.imageUrl}}" ng-show="featuredStory.imageUrl.length">
                 <button class="clean-button clean-button--plain" ng-click="openImageGallery('story', featuredStory)"><img src="/img/icon_gallery.svg" class="smpscss-u-size16x16 smpscss-u-marginRight10"/></button>
                 <i class="clean-text text-s ct-l-green" style="margin-top:5px; margin-bottom:10px" ng-show="fetchingFeatureStoryUrls[featuredStory.url.trim()]">
