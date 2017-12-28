@@ -71,7 +71,7 @@ angularApp
         
         $scope.sendPubContributeRequest = function() {
             var pub = $scope.pub
-            if(!CurrentUser.get()) {
+            if(!SmedianPages.CurrentUser.get()) {
                 //the user isn't logged in. send it to log in with Medium.com's auth
                 $scope.loginMediumer();
                 return

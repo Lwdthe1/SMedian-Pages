@@ -106,7 +106,7 @@ SmedianPages.component.ActionsMenu = function(config) {
                 } else {
                     debugger
                     var el = $('.js-SmedianPageComponentActionsMenu-masterPubProfileLink')
-                    el.attr('href', `/p/${_page.masterObjectId}?settings=1`)
+                    el.attr('href', `/p/${_page.masterObjectId}/dashboard`)
                     el.text(`${_page.masterObject.name} Dashboard`)
                     el.show()
                 }
